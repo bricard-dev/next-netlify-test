@@ -8,6 +8,7 @@ export default defineConfig({
   title: "Next Netlify Test",
   projectId,
   dataset,
+  basePath: "/studio",
   plugins: [structureTool()],
   schema: {
     types: schemaTypes,
