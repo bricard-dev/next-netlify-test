@@ -15,7 +15,7 @@ This is a Next.js 16 app using the **App Router** (`src/app/` directory), React 
 
 - **Path alias**: `@/*` maps to `./src/*`
 - **Styling**: Tailwind CSS v4 with `@tailwindcss/postcss`; theme uses CSS custom properties in `globals.css` with light/dark mode via `prefers-color-scheme`
-- **Fonts**: Geist Sans and Geist Mono loaded via `next/font/google`, exposed as CSS variables `--font-geist-sans` and `--font-geist-mono`
+- **Fonts**: Playfair Display (serif, headings) and Instrument Sans (sans, body) loaded via `next/font/google`. Mapped in Tailwind theme as `font-serif` and `font-sans`. All `h1`–`h6` use `font-serif` via `@layer base`
 - **ESLint**: Flat config format (ESLint 9) with Next.js core web vitals and TypeScript rules
 - **CMS**: Sanity (headless). Studio intégré à `/studio`. Config dans `sanity.config.ts`, client et schémas dans `src/sanity/`. Requêtes via GROQ avec `next-sanity`
 
