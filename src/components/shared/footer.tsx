@@ -1,6 +1,77 @@
+import { BrandLogo } from "@/components/shared/brand-logo";
 import { NAV_LINKS } from "@/lib/navigation";
+import { getGroupedWeekSchedule } from "@/lib/schedule";
+import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/sanity/queries/settings";
+import { Clock3Icon, MapPinIcon, PhoneIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+
+const PAYMENT_METHODS = [
+  { src: "/icons/payment/Visa.svg", alt: "Visa" },
+  { src: "/icons/payment/Mastercard.svg", alt: "Mastercard" },
+  { src: "/icons/payment/ApplePay.svg", alt: "Apple Pay" },
+  { src: "/icons/payment/GooglePay.svg", alt: "Google Pay" },
+] as const;
+
+const LEGAL_LINKS = [
+  {
+    href: "/politique-de-confidentialite",
+    label: "Politique de confidentialité",
+  },
+  { href: "/mentions-legales", label: "Mentions légales" },
+] as const;
+
+// ---------------------------------------------------------------------------
+// Private sub-components
+// ---------------------------------------------------------------------------
+
+function FooterSection({
+  title,
+  className,
+  children,
+}: {
+  title: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={cn("flex flex-col gap-4", className)}>
+      <h3 className="hidden font-semibold lg:block">{title}</h3>
+      {children}
+    </div>
+  );
+}
+
+function FooterSchedule({ settings }: { settings: SiteSettings }) {
+  const schedule = getGroupedWeekSchedule(settings);
+
+  return (
+    <div className="flex items-start gap-3">
+      <Clock3Icon className="text-primary hidden size-4 shrink-0 lg:mt-0.5 lg:block" />
+      <p className="opacity-60 lg:hidden">
+        {schedule
+          .map(({ days, formatted }) => `${days} : ${formatted}`)
+          .join(" · ")}
+      </p>
+      <ul className="hidden flex-col gap-0.5 opacity-60 lg:flex">
+        {schedule.map(({ days, formatted }) => (
+          <li key={days}>
+            {days} : {formatted}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Main component
+// ---------------------------------------------------------------------------
 
 interface FooterProps {
   settings?: SiteSettings;
@@ -8,104 +79,104 @@ interface FooterProps {
 
 export function Footer({ settings }: FooterProps) {
   const currentYear = new Date().getFullYear();
-
   const bakeryName = settings?.bakeryName ?? "Boulangerie";
 
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-footer-background text-footer-foreground">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Column 1: Info */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-lg font-semibold">{bakeryName}</h3>
-            <p className="text-sm opacity-80">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, cum!
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
+          {/* Presentation */}
+          <div className="flex w-full max-w-80 flex-col items-center gap-4 lg:items-start">
+            <BrandLogo name={bakeryName} />
+            <p className="text-center text-xs leading-[150%] opacity-60 lg:text-left lg:text-sm">
+              Pain artisanal et pâtisseries cuits chaque jour avec amour et
+              tradition depuis 1952.
             </p>
-            {/* {settings?.address && (
-              <p className="text-sm opacity-80">{settings.address}</p>
-            )}
-            {settings.phone && (
-              <a
-                href={`tel:${settings.phone}`}
-                className="text-sm opacity-80 transition-opacity hover:opacity-100"
-              >
-                {settings.phone}
-              </a>
-            )}
-            {settings.email && (
-              <a
-                href={`mailto:${settings.email}`}
-                className="text-sm opacity-80 transition-opacity hover:opacity-100"
-              >
-                {settings.email}
-              </a>
-            )} */}
           </div>
 
-          {/* Column 2: Schedule */}
-          {/* <div className="flex flex-col gap-3">
-            <h3 className="text-lg font-semibold">Horaires</h3>
-            <ul className="flex flex-col gap-1.5">
-              {getGroupedWeekSchedule(settings).map(
-                ({ days, formatted }, index) => (
-                  <li
-                    key={`${days}-${index}`}
-                    className="flex justify-between gap-4 text-sm opacity-80"
-                  >
-                    <span>{days}</span>
-                    <span>{formatted}</span>
-                  </li>
-                ),
-              )}
-            </ul>
-          </div> */}
-
-          {/* Column 3: Nav + Social */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-lg font-semibold">Navigation</h3>
-            <nav className="flex flex-col gap-1.5">
+          {/* Navigation */}
+          <FooterSection title="Navigation">
+            <nav className="flex gap-6 lg:flex-col lg:gap-4">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm opacity-80 transition-opacity hover:opacity-100"
+                  className="text-sm opacity-80 transition-opacity hover:opacity-100 lg:opacity-60 lg:hover:opacity-80"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
-            {/* {settings.socialLinks && (
-              <div className="mt-2 flex gap-4">
-                {settings.socialLinks.instagram && (
-                  <a
-                    href={settings.socialLinks.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-80 transition-opacity hover:opacity-100"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </a>
-                )}
-                {settings.socialLinks.facebook && (
-                  <a
-                    href={settings.socialLinks.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-80 transition-opacity hover:opacity-100"
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="h-5 w-5" />
-                  </a>
-                )}
-              </div>
-            )} */}
-          </div>
+          </FooterSection>
+
+          {/* Informations pratiques */}
+          <FooterSection title="Informations pratiques">
+            <div className="flex flex-col items-center gap-2 text-xs lg:items-start lg:gap-3 lg:text-sm">
+              {settings?.address && (
+                <a
+                  href={`https://maps.google.com/maps?q=${encodeURIComponent(settings.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3"
+                >
+                  <MapPinIcon className="text-primary hidden size-4 shrink-0 lg:block" />
+                  <span className="opacity-60 transition-opacity hover:opacity-80">
+                    {settings.address}
+                  </span>
+                </a>
+              )}
+              {settings?.hours && <FooterSchedule settings={settings} />}
+              {settings?.phone && (
+                <a
+                  href={`tel:${settings.phone}`}
+                  className="flex items-center gap-3"
+                >
+                  <PhoneIcon className="text-primary hidden size-4 shrink-0 lg:block" />
+                  <span className="opacity-60 transition-opacity hover:opacity-80">
+                    {settings.phone}
+                  </span>
+                </a>
+              )}
+            </div>
+          </FooterSection>
+
+          {/* Moyens de paiement */}
+          <FooterSection
+            title="Nous acceptons"
+            className="items-center lg:items-start"
+          >
+            <div className="flex flex-wrap gap-2">
+              {PAYMENT_METHODS.map(({ src, alt }) => (
+                <Image
+                  key={alt}
+                  src={src}
+                  alt={alt}
+                  width={35}
+                  height={24}
+                  className="rounded"
+                  unoptimized
+                />
+              ))}
+            </div>
+          </FooterSection>
         </div>
 
-        <div className="border-primary-foreground/20 mt-10 border-t pt-6 text-center text-sm opacity-60">
-          &copy; {currentYear} {bakeryName}. Tous droits r&eacute;serv&eacute;s.
+        {/* Copyright & liens légaux */}
+        <div className="border-footer-foreground/20 mt-10 flex flex-col items-center gap-6 border-t pt-6 text-xs sm:flex-row sm:justify-between lg:text-sm">
+          <span className="opacity-60">
+            © {currentYear} {bakeryName}. Tous droits réservés.
+          </span>
+          <nav className="flex gap-5 lg:gap-4">
+            {LEGAL_LINKS.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="opacity-60 transition-opacity hover:opacity-80"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

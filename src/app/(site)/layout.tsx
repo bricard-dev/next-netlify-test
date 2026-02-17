@@ -1,3 +1,4 @@
+import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
 import { getSiteSettings } from "@/sanity/queries/settings";
 
@@ -11,10 +12,10 @@ export default async function SiteLayout({
   const bakeryName = settings?.bakeryName ?? "Boulangerie";
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-dvh flex-col">
       <Header bakeryName={bakeryName} settings={settings ?? undefined} />
       <main className="flex-1">{children}</main>
-      {/* <Footer settings={settings ?? undefined} /> */}
+      <Footer settings={settings ?? undefined} />
     </div>
   );
 }
