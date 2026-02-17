@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Instrument_Sans } from "next/font/google";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair-display",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
 });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${playfairDisplay.variable} ${instrumentSans.variable} antialiased`}
+        className={`${fraunces.variable} ${instrumentSans.variable} antialiased`}
       >
         {children}
       </body>
