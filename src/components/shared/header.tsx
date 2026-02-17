@@ -5,16 +5,10 @@ import { NAV_LINKS } from "@/lib/navigation";
 import { getGroupedWeekSchedule } from "@/lib/schedule";
 import { cn } from "@/lib/utils";
 import { SiteSettings } from "@/sanity/queries/settings";
-import {
-  Clock3Icon,
-  CroissantIcon,
-  MapPinIcon,
-  Menu,
-  PhoneIcon,
-  X,
-} from "lucide-react";
+import { Clock3Icon, MapPinIcon, Menu, PhoneIcon, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { BrandLogo } from "./brand-logo";
 import { NavLink } from "./nav-link";
 
 const CTA = { href: "/produits", label: "Voir nos produits" } as const;
@@ -53,7 +47,7 @@ function MobileMenu({ open, onClose, settings }: MobileMenuProps) {
         <Link href={CTA.href}>{CTA.label}</Link>
       </Button>
 
-      {/* Informations pratiques */}
+      {/* Practical Informations */}
       <div className="-mx-4 flex flex-col items-center gap-6 bg-[#FAF8F4] px-4 py-8">
         <h3 className="text-primary font-sans text-xs font-semibold tracking-widest uppercase">
           Nous rendre visite
@@ -73,7 +67,7 @@ function MobileMenu({ open, onClose, settings }: MobileMenuProps) {
             </a>
           )}
           {settings?.hours && (
-            <div className="flex items-center gap-3">
+            <div className="flex gap-3">
               <Clock3Icon className="text-primary mt-0.5 size-4 shrink-0" />
               <ul className="flex flex-col gap-0.5">
                 {getGroupedWeekSchedule(settings).map(({ days, formatted }) => (
@@ -125,10 +119,7 @@ export function Header({ bakeryName, settings }: HeaderProps) {
     >
       {/* Barre supérieure */}
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-          <CroissantIcon className="size-5" aria-hidden="true" />
-          <span className="font-serif text-lg font-bold">{bakeryName}</span>
-        </Link>
+        <BrandLogo name={bakeryName} onClick={closeMenu} />
 
         {/* Navigation desktop */}
         <div className="hidden items-center gap-8 lg:flex">
