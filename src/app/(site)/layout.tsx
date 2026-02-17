@@ -1,5 +1,4 @@
 import { Header } from "@/components/shared/header";
-import { Footer } from "@/components/shared/footer";
 import { getSiteSettings } from "@/sanity/queries/settings";
 
 export default async function SiteLayout({
@@ -13,9 +12,9 @@ export default async function SiteLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header bakeryName={bakeryName} logo={settings?.logo} />
+      <Header bakeryName={bakeryName} settings={settings ?? undefined} />
       <main className="flex-1">{children}</main>
-      {settings && <Footer settings={settings} />}
+      {/* <Footer settings={settings ?? undefined} /> */}
     </div>
   );
 }
