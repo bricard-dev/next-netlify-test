@@ -13,8 +13,10 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Boulangerie artisanale",
-  description: "Boulangerie artisanale française - Pain frais et pâtisseries fait maison",
+  title: {
+    default: "Boulangerie artisanale",
+    template: "%s | Boulangerie artisanale",
+  },
 };
 
 export default function RootLayout({

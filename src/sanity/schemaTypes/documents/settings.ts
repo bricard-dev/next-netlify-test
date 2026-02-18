@@ -12,10 +12,11 @@ export const settings = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
-      options: { hotspot: true },
+      name: 'siteDescription',
+      title: 'Site Description',
+      type: 'text',
+      rows: 2,
+      description: 'Used for SEO meta description (recommended: 150–160 characters).',
     }),
     defineField({
       name: 'address',

@@ -1,5 +1,5 @@
+import { cache } from 'react';
 import { client } from '@/sanity/client';
-import type { SanityImageSource } from '@sanity/image-url';
 
 /**
  * Type pour les horaires d'un jour (dayHours)
@@ -28,7 +28,7 @@ export type WeeklyHours = {
  */
 export type SiteSettings = {
   bakeryName: string;
-  logo?: SanityImageSource;
+  siteDescription?: string;
   address?: string;
   phone?: string;
   email?: string;
@@ -42,7 +42,7 @@ export type SiteSettings = {
 // Query pour le singleton settings (ID fixe = 'settings')
 const SETTINGS_QUERY = `*[_type == "settings" && _id == "settings"][0]{
   bakeryName,
-  logo,
+  siteDescription,
   address,
   phone,
   email,
@@ -86,6 +86,6 @@ const SETTINGS_QUERY = `*[_type == "settings" && _id == "settings"][0]{
   socialLinks
 }`;
 
-export async function getSiteSettings(): Promise<SiteSettings | null> {
+export const getSiteSettings = cache(async (): Promise<SiteSettings | null> => {
   return client.fetch(SETTINGS_QUERY, {}, { next: { revalidate: 60 } });
-}
+});
