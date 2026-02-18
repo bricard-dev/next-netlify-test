@@ -50,6 +50,34 @@ Rules:
 - Optional body separated by a blank line for additional context
 - Examples: `feat(auth): add login page`, `fix(api): handle null response`
 
+## Development Methodology
+
+This is a small bakery showcase site. Keep it simple and content-focused.
+
+### Build page by page, not component by component
+Complete each page end-to-end before refactoring. Typical pages: home, products, about, contact.
+
+### Sanity-first workflow
+Define schemas before coding UI — content drives everything. For each page:
+1. Define the Sanity schema
+2. Add mock content in the Studio
+3. Write the GROQ query
+4. Build the Next.js component that displays the data
+
+### Testing strategy
+- **No TDD on UI** — avoid testing React implementation details
+- **Vitest** for pure utility functions and GROQ helpers only, when logic is non-trivial
+- **Playwright** for 1–2 critical user flows (e.g. page renders, contact form works)
+- Do not aim for exhaustive test coverage
+
+### What to avoid
+- Over-engineering components (no need for a full design system)
+- Spending time on config instead of content and design
+- Abstracting things prematurely
+
+### Rhythm
+One branch per page (`feature/<page-name>`) → PR to `develop` → merge when the page is presentable.
+
 ## Sanity CMS
 
 ### Singletons
