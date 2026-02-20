@@ -19,6 +19,7 @@ export type WeeklyHours = {
 
 export type SiteSettings = {
   bakeryName: string;
+  instagramUrl?: string;
   address?: string;
   phone?: string;
   email?: string;
@@ -31,6 +32,7 @@ export type SiteSettings = {
 
 const SETTINGS_QUERY = `*[_type == "settings" && _id == "settings"][0]{
   bakeryName,
+  instagramUrl,
   address,
   phone,
   email,

@@ -1,9 +1,18 @@
-import { HatGlasses, Landmark, Mail, Scale, Settings, Tag } from "lucide-react";
+import {
+  HatGlasses,
+  Home,
+  Landmark,
+  Mail,
+  Scale,
+  Settings,
+  Tag,
+} from "lucide-react";
 import type { StructureResolver } from "sanity/structure";
 
 // Types de documents singleton à exclure des listes génériques
 const SINGLETONS = [
   "settings",
+  "homePage",
   "productsPage",
   "aboutPage",
   "contactPage",
@@ -17,6 +26,8 @@ export const structure: StructureResolver = (S) =>
     .items([
       // Singleton : Site Settings
       S.listItem()
+        .id("settings")
+        .schemaType("settings")
         .title("Site Settings")
         .icon(Settings)
         .child(
@@ -28,8 +39,23 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
+      // Singleton : Home Page
+      S.listItem()
+        .id("homePage")
+        .schemaType("homePage")
+        .title("Home Page")
+        .icon(Home)
+        .child(
+          S.document()
+            .schemaType("homePage")
+            .documentId("homePage")
+            .title("Home Page"),
+        ),
+
       // Singleton : Products Page
       S.listItem()
+        .id("productsPage")
+        .schemaType("productsPage")
         .title("Products Page")
         .icon(Tag)
         .child(
@@ -41,6 +67,8 @@ export const structure: StructureResolver = (S) =>
 
       // Singleton : About Page
       S.listItem()
+        .id("aboutPage")
+        .schemaType("aboutPage")
         .title("About Page")
         .icon(Landmark)
         .child(
@@ -52,6 +80,8 @@ export const structure: StructureResolver = (S) =>
 
       // Singleton : Contact Page
       S.listItem()
+        .id("contactPage")
+        .schemaType("contactPage")
         .title("Contact Page")
         .icon(Mail)
         .child(
@@ -65,6 +95,8 @@ export const structure: StructureResolver = (S) =>
 
       // Singleton : Privacy Policy
       S.listItem()
+        .id("privacyPage")
+        .schemaType("privacyPage")
         .title("Privacy Policy")
         .icon(HatGlasses)
         .child(
@@ -76,6 +108,8 @@ export const structure: StructureResolver = (S) =>
 
       // Singleton : Legal Notice
       S.listItem()
+        .id("legalNoticePage")
+        .schemaType("legalNoticePage")
         .title("Legal Notice")
         .icon(Scale)
         .child(
