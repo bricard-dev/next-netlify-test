@@ -1,5 +1,5 @@
 import { defineType } from 'sanity';
-import { TimeValueInput } from '../components/TimeValueInput';
+import { TimeValueInput } from '../components/time-value-input';
 
 export const timeValueType = defineType({
   name: 'timeValue',

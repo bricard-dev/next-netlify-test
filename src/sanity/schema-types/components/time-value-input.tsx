@@ -1,6 +1,6 @@
 import { Select } from '@sanity/ui';
 import { set, StringInputProps } from 'sanity';
-import { ALLOWED_TIMES } from '../objects/timeValue';
+import { ALLOWED_TIMES } from '../objects/time-value';
 
 export function TimeValueInput(props: StringInputProps) {
   const { onChange, value = '', readOnly } = props;

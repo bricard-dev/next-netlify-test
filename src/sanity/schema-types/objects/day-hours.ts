@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { DayHoursInput } from '../components/DayHoursInput';
+import { DayHoursInput } from '../components/day-hours-input';
 
 export const dayHoursType = defineType({
   name: 'dayHours',
