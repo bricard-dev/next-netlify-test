@@ -82,8 +82,8 @@ export function Footer({ settings }: FooterProps) {
   const bakeryName = settings?.bakeryName ?? "Boulangerie";
 
   return (
-    <footer className="bg-footer-background text-footer-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-12">
+    <footer className="bg-section-dark text-footer-foreground">
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-12 md:pt-24 md:pb-12">
         <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
           {/* Presentation */}
           <div className="flex w-full max-w-80 flex-col items-center gap-4 lg:items-start">
