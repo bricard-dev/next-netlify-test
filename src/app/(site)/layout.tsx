@@ -10,8 +10,8 @@ const FALLBACK_DESCRIPTION =
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
 
-  const title = settings?.bakeryName ?? FALLBACK_TITLE;
-  const description = settings?.siteDescription ?? FALLBACK_DESCRIPTION;
+  const title = settings?.seo?.title ?? settings?.bakeryName ?? FALLBACK_TITLE;
+  const description = settings?.seo?.description ?? FALLBACK_DESCRIPTION;
 
   return {
     title,

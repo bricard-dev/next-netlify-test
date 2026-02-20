@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { WeeklyHoursInput } from '../components/WeeklyHoursInput';
+import { WeeklyHoursInput } from '../components/weekly-hours-input';
 
 export const weeklyHoursType = defineType({
   name: 'weeklyHours',

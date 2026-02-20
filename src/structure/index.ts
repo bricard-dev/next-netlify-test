@@ -1,28 +1,128 @@
-import type { StructureResolver } from 'sanity/structure';
-import { CogIcon } from '@sanity/icons';
+import {
+  HatGlasses,
+  Home,
+  Landmark,
+  Mail,
+  Scale,
+  Settings,
+  Tag,
+} from "lucide-react";
+import type { StructureResolver } from "sanity/structure";
 
 // Types de documents singleton à exclure des listes génériques
-const SINGLETONS = ['settings'];
+const SINGLETONS = [
+  "settings",
+  "homePage",
+  "productsPage",
+  "aboutPage",
+  "contactPage",
+  "privacyPage",
+  "legalNoticePage",
+];
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Website Content')
+    .title("Website Content")
     .items([
       // Singleton : Site Settings
       S.listItem()
-        .title('Site Settings')
-        .icon(CogIcon)
+        .id("settings")
+        .schemaType("settings")
+        .title("Site Settings")
+        .icon(Settings)
         .child(
           S.document()
-            .schemaType('settings')
-            .documentId('settings') // ID fixe = singleton
-            .title('Site Settings')
+            .schemaType("settings")
+            .documentId("settings")
+            .title("Site Settings"),
+        ),
+
+      S.divider(),
+
+      // Singleton : Home Page
+      S.listItem()
+        .id("homePage")
+        .schemaType("homePage")
+        .title("Home Page")
+        .icon(Home)
+        .child(
+          S.document()
+            .schemaType("homePage")
+            .documentId("homePage")
+            .title("Home Page"),
+        ),
+
+      // Singleton : Products Page
+      S.listItem()
+        .id("productsPage")
+        .schemaType("productsPage")
+        .title("Products Page")
+        .icon(Tag)
+        .child(
+          S.document()
+            .schemaType("productsPage")
+            .documentId("productsPage")
+            .title("Products Page"),
+        ),
+
+      // Singleton : About Page
+      S.listItem()
+        .id("aboutPage")
+        .schemaType("aboutPage")
+        .title("About Page")
+        .icon(Landmark)
+        .child(
+          S.document()
+            .schemaType("aboutPage")
+            .documentId("aboutPage")
+            .title("About Page"),
+        ),
+
+      // Singleton : Contact Page
+      S.listItem()
+        .id("contactPage")
+        .schemaType("contactPage")
+        .title("Contact Page")
+        .icon(Mail)
+        .child(
+          S.document()
+            .schemaType("contactPage")
+            .documentId("contactPage")
+            .title("Contact Page"),
+        ),
+
+      S.divider(),
+
+      // Singleton : Privacy Policy
+      S.listItem()
+        .id("privacyPage")
+        .schemaType("privacyPage")
+        .title("Privacy Policy")
+        .icon(HatGlasses)
+        .child(
+          S.document()
+            .schemaType("privacyPage")
+            .documentId("privacyPage")
+            .title("Privacy Policy"),
+        ),
+
+      // Singleton : Legal Notice
+      S.listItem()
+        .id("legalNoticePage")
+        .schemaType("legalNoticePage")
+        .title("Legal Notice")
+        .icon(Scale)
+        .child(
+          S.document()
+            .schemaType("legalNoticePage")
+            .documentId("legalNoticePage")
+            .title("Legal Notice"),
         ),
 
       S.divider(),
 
       // Tous les autres types de documents (filtrés pour exclure les singletons)
       ...S.documentTypeListItems().filter(
-        (listItem) => !SINGLETONS.includes(listItem.getId() as string)
+        (listItem) => !SINGLETONS.includes(listItem.getId() as string),
       ),
     ]);
