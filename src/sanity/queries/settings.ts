@@ -1,36 +1,17 @@
 import { cache } from 'react';
+import { defineQuery } from 'next-sanity';
 import { client } from '@/sanity/client';
+import type { SETTINGS_QUERY_RESULT } from '@/sanity/sanity.types';
 
-export type DayHours = {
-  isOpen?: boolean;
-  open?: string; // Format "HH:mm"
-  close?: string; // Format "HH:mm"
-};
+// ─── Types ───────────────────────────────────────────────────────────────────
 
-export type WeeklyHours = {
-  monday?: DayHours;
-  tuesday?: DayHours;
-  wednesday?: DayHours;
-  thursday?: DayHours;
-  friday?: DayHours;
-  saturday?: DayHours;
-  sunday?: DayHours;
-};
+export type SiteSettings = NonNullable<SETTINGS_QUERY_RESULT>;
+export type WeeklyHours = NonNullable<SiteSettings['hours']>;
+export type DayHours = NonNullable<WeeklyHours['monday']>;
 
-export type SiteSettings = {
-  bakeryName: string;
-  instagramUrl?: string;
-  address?: string;
-  phone?: string;
-  email?: string;
-  hours?: WeeklyHours;
-  seo?: {
-    title?: string;
-    description?: string;
-  };
-};
+// ─── Query ───────────────────────────────────────────────────────────────────
 
-const SETTINGS_QUERY = `*[_type == "settings" && _id == "settings"][0]{
+const SETTINGS_QUERY = defineQuery(`*[_type == "settings" && _id == "settings"][0]{
   bakeryName,
   instagramUrl,
   address,
@@ -49,8 +30,8 @@ const SETTINGS_QUERY = `*[_type == "settings" && _id == "settings"][0]{
     title,
     description
   }
-}`;
+}`);
 
-export const getSiteSettings = cache(async (): Promise<SiteSettings | null> => {
+export const getSiteSettings = cache(async () => {
   return client.fetch(SETTINGS_QUERY, {}, { next: { revalidate: 60 } });
 });

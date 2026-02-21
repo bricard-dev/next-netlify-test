@@ -40,7 +40,7 @@ function ServiceIcon({ name }: { name?: string }) {
 function ServiceCard({ item }: { item: ServiceItem }) {
   return (
     <div className="flex flex-col items-center gap-4 text-center">
-      <ServiceIcon name={item.iconName} />
+      <ServiceIcon name={item.iconName ?? undefined} />
       <h3 className="text-lg font-medium">{item.title}</h3>
       <p className="text-muted-foreground font-sans text-sm leading-relaxed">
         {item.description}

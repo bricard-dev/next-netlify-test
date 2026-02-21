@@ -59,7 +59,7 @@ export function AboutSection({ data }: Props) {
         {aboutCta && (
           <div className="w-full lg:w-auto">
             <Button variant="secondary" size="lg" asChild className="w-full lg:w-auto">
-              <Link href={aboutCta.href}>{aboutCta.label}</Link>
+              <Link href={aboutCta.href ?? ""}>{aboutCta.label}</Link>
             </Button>
           </div>
         )}

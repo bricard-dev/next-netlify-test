@@ -52,16 +52,16 @@ function ReviewCard({ item }: { item: ReviewItem }) {
             <div className="relative size-12 shrink-0 overflow-hidden rounded-full">
               <Image
                 src={urlFor(item.avatar).width(96).height(96).url()}
-                alt={item.name}
+                alt={item.name ?? ""}
                 fill
                 className="object-cover"
               />
             </div>
           ) : (
             <div
-              className={`flex size-12 shrink-0 items-center justify-center rounded-full font-sans text-base font-semibold text-white ${getAvatarColor(item.name)}`}
+              className={`flex size-12 shrink-0 items-center justify-center rounded-full font-sans text-base font-semibold text-white ${getAvatarColor(item.name ?? "")}`}
             >
-              {item.name.charAt(0).toUpperCase()}
+              {item.name?.charAt(0).toUpperCase()}
             </div>
           )}
           <div className="flex flex-col gap-1">
@@ -69,7 +69,7 @@ function ReviewCard({ item }: { item: ReviewItem }) {
               {item.name}
             </p>
             <div className="lg:hidden">
-              <StarRating rating={item.rating} />
+              <StarRating rating={item.rating ?? 0} />
             </div>
             {item.source && (
               <p className="hidden text-xs text-white/50 lg:block">
@@ -79,12 +79,12 @@ function ReviewCard({ item }: { item: ReviewItem }) {
           </div>
         </div>
         <div className="hidden lg:block">
-          <StarRating rating={item.rating} />
+          <StarRating rating={item.rating ?? 0} />
         </div>
       </div>
 
       <p className="text-sm text-white/70 lg:text-base">
-        &ldquo;{normalizeText(item.text)}&rdquo;
+        &ldquo;{normalizeText(item.text ?? "")}&rdquo;
       </p>
     </div>
   );
