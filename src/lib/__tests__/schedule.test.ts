@@ -22,12 +22,12 @@ describe('formatDaySchedule', () => {
   });
 
   it('returns "Fermé" when open is missing', () => {
-    const schedule: DayHours = { isOpen: true, close: '18:00' };
+    const schedule: DayHours = { isOpen: true, open: null, close: '18:00' };
     expect(formatDaySchedule(schedule)).toBe('Fermé');
   });
 
   it('returns "Fermé" when close is missing', () => {
-    const schedule: DayHours = { isOpen: true, open: '09:00' };
+    const schedule: DayHours = { isOpen: true, open: '09:00', close: null };
     expect(formatDaySchedule(schedule)).toBe('Fermé');
   });
 
@@ -79,7 +79,7 @@ describe('isOpenNow', () => {
   });
 
   it('returns false when day has no open/close times', () => {
-    const noTimes: DayHours = { isOpen: true };
+    const noTimes: DayHours = { isOpen: true, open: null, close: null };
     expect(isOpenNow(noTimes, new Date('2024-01-01T12:00:00'))).toBe(false);
   });
 });
@@ -100,7 +100,8 @@ describe('getGroupedWeekSchedule', () => {
 
   it('groups Mon-Fri with the same schedule as a range', () => {
     const weekHours: DayHours = { isOpen: true, open: '09:00', close: '18:00' };
-    const settings: SiteSettings = {
+    const closed: DayHours = { isOpen: false, open: null, close: null };
+    const settings = {
       bakeryName: 'Test',
       hours: {
         monday: weekHours,
@@ -108,10 +109,10 @@ describe('getGroupedWeekSchedule', () => {
         wednesday: weekHours,
         thursday: weekHours,
         friday: weekHours,
-        saturday: { isOpen: false },
-        sunday: { isOpen: false },
+        saturday: closed,
+        sunday: closed,
       },
-    };
+    } as SiteSettings;
 
     const result = getGroupedWeekSchedule(settings);
 
@@ -127,18 +128,19 @@ describe('getGroupedWeekSchedule', () => {
 
   it('lists non-consecutive days with the same schedule separately', () => {
     const sameHours: DayHours = { isOpen: true, open: '09:00', close: '13:00' };
-    const settings: SiteSettings = {
+    const closed: DayHours = { isOpen: false, open: null, close: null };
+    const settings = {
       bakeryName: 'Test',
       hours: {
         monday: sameHours,
-        tuesday: { isOpen: false },
+        tuesday: closed,
         wednesday: sameHours,
-        thursday: { isOpen: false },
-        friday: { isOpen: false },
-        saturday: { isOpen: false },
-        sunday: { isOpen: false },
+        thursday: closed,
+        friday: closed,
+        saturday: closed,
+        sunday: closed,
       },
-    };
+    } as SiteSettings;
 
     const result = getGroupedWeekSchedule(settings);
 
@@ -148,18 +150,19 @@ describe('getGroupedWeekSchedule', () => {
   });
 
   it('groups all closed days together', () => {
-    const settings: SiteSettings = {
+    const closed: DayHours = { isOpen: false, open: null, close: null };
+    const settings = {
       bakeryName: 'Test',
       hours: {
-        monday: { isOpen: false },
-        tuesday: { isOpen: false },
-        wednesday: { isOpen: false },
-        thursday: { isOpen: false },
-        friday: { isOpen: false },
-        saturday: { isOpen: false },
-        sunday: { isOpen: false },
+        monday: closed,
+        tuesday: closed,
+        wednesday: closed,
+        thursday: closed,
+        friday: closed,
+        saturday: closed,
+        sunday: closed,
       },
-    };
+    } as SiteSettings;
 
     const result = getGroupedWeekSchedule(settings);
     expect(result).toHaveLength(1);
