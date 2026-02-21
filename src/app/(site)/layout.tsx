@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
 import { getSiteSettings } from "@/sanity/queries/settings";
+import { SanityLive } from "@/sanity/live";
 
 const FALLBACK_TITLE = "Boulangerie artisanale";
 const FALLBACK_DESCRIPTION =
@@ -49,6 +50,7 @@ export default async function SiteLayout({
         {children}
       </main>
       <Footer settings={settings ?? undefined} />
+      <SanityLive />
     </div>
   );
 }

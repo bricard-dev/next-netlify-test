@@ -1,6 +1,5 @@
-import { cache } from 'react';
 import { defineQuery } from 'next-sanity';
-import { client } from '@/sanity/client';
+import { sanityFetch } from '@/sanity/live';
 import type { HOME_PAGE_QUERY_RESULT } from '@/sanity/sanity.types';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -68,6 +67,7 @@ const HOME_PAGE_QUERY = defineQuery(`*[_type == "homePage" && _id == "homePage"]
   galleryImages[]{ ..., alt }
 }`);
 
-export const getHomePageData = cache(async () => {
-  return client.fetch(HOME_PAGE_QUERY, {}, { next: { revalidate: 60 } });
-});
+export async function getHomePageData() {
+  const { data } = await sanityFetch({ query: HOME_PAGE_QUERY });
+  return data;
+}
