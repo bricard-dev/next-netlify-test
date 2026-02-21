@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
+import { DisableDraftMode } from "@/components/shared/disable-draft-mode";
 import { getSiteSettings } from "@/sanity/queries/settings";
+import { SanityLive } from "@/sanity/live";
 
 const FALLBACK_TITLE = "Boulangerie artisanale";
 const FALLBACK_DESCRIPTION =
@@ -36,6 +40,7 @@ export default async function SiteLayout({
   children: React.ReactNode;
 }>) {
   const settings = await getSiteSettings();
+  const { isEnabled: isDraftMode } = await draftMode();
 
   const bakeryName = settings?.bakeryName ?? "Boulangerie";
 
@@ -49,6 +54,13 @@ export default async function SiteLayout({
         {children}
       </main>
       <Footer settings={settings ?? undefined} />
+      <SanityLive />
+      {isDraftMode && (
+        <>
+          <VisualEditing />
+          <DisableDraftMode />
+        </>
+      )}
     </div>
   );
 }

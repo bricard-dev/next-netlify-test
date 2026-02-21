@@ -1,6 +1,5 @@
-import { cache } from 'react';
 import { defineQuery } from 'next-sanity';
-import { client } from '@/sanity/client';
+import { sanityFetch } from '@/sanity/live';
 import type { SETTINGS_QUERY_RESULT } from '@/sanity/sanity.types';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -32,6 +31,7 @@ const SETTINGS_QUERY = defineQuery(`*[_type == "settings" && _id == "settings"][
   }
 }`);
 
-export const getSiteSettings = cache(async () => {
-  return client.fetch(SETTINGS_QUERY, {}, { next: { revalidate: 60 } });
-});
+export async function getSiteSettings() {
+  const { data } = await sanityFetch({ query: SETTINGS_QUERY });
+  return data;
+}
