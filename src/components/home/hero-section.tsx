@@ -57,7 +57,7 @@ export function HeroSection({ data }: Props) {
           <div className="flex flex-wrap items-center justify-center gap-4">
             {heroPrimaryCta && (
               <Button asChild size="lg">
-                <Link href={heroPrimaryCta.href}>{heroPrimaryCta.label}</Link>
+                <Link href={heroPrimaryCta.href ?? ""}>{heroPrimaryCta.label}</Link>
               </Button>
             )}
             {heroSecondaryCta && (
@@ -67,7 +67,7 @@ export function HeroSection({ data }: Props) {
                 size="lg"
                 className="border-white/70 bg-white/10 text-white hover:bg-white/20 hover:text-white"
               >
-                <Link href={heroSecondaryCta.href}>
+                <Link href={heroSecondaryCta.href ?? ""}>
                   {heroSecondaryCta.label}
                 </Link>
               </Button>

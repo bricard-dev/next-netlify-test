@@ -105,7 +105,7 @@ export function LocationSection({ data, settings }: Props) {
         {locationCta && (
           <div className="w-full lg:w-auto">
             <Button asChild size="lg" className="w-full lg:w-auto">
-              <Link href={locationCta.href}>{locationCta.label}</Link>
+              <Link href={locationCta.href ?? ""}>{locationCta.label}</Link>
             </Button>
           </div>
         )}

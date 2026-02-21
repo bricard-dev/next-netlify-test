@@ -42,6 +42,9 @@ yarn-error.log*
 # netlify
 .netlify
 
+# sanity typegen (intermediate artifact)
+schema.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

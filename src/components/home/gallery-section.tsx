@@ -79,7 +79,7 @@ type Props = {
 
 export function GallerySection({ data, settings }: Props) {
   const images = data.galleryImages;
-  const instagramUrl = settings?.instagramUrl;
+  const instagramUrl = settings?.instagramUrl ?? undefined;
 
   if (!images?.length) return null;
 

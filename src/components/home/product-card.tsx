@@ -9,21 +9,23 @@ type Props = {
 
 export function ProductCard({ product }: Props) {
   const { name, tagline, price, image, slug } = product;
-  const imageUrl = urlFor(image).width(600).height(400).url();
+  const imageUrl = image ? urlFor(image).width(600).height(400).url() : null;
 
   return (
     <Link
-      href={`/produits/${slug.current}`}
+      href={`/produits/${slug?.current ?? ""}`}
       className="group border-border bg-card flex flex-col overflow-hidden rounded-2xl border shadow-xs transition-shadow hover:shadow-md"
     >
       <div className="relative aspect-3/2 overflow-hidden">
-        <Image
-          src={imageUrl}
-          alt={image.alt ?? name}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            alt={image?.alt ?? name ?? ""}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col items-center gap-1 p-4 text-center">
         <h3 className="text-base font-medium">{name}</h3>
