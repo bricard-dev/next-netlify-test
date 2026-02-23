@@ -3,6 +3,7 @@ import { type SchemaTypeDefinition } from 'sanity';
 // Documents
 import { settings } from './documents/settings';
 import { homePageType } from './documents/home-page';
+import { categoryType } from './documents/category';
 import { productType } from './documents/product';
 import { productsPageType } from './documents/products-page';
 import { aboutPageType } from './documents/about-page';
@@ -24,6 +25,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents
   settings,
   homePageType,
+  categoryType,
   productType,
   productsPageType,
   aboutPageType,

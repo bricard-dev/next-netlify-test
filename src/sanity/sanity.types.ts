@@ -215,6 +215,13 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+export type ProductCategoryReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "productCategory";
+};
+
 export type ProductsPage = {
   _id: string;
   _type: "productsPage";
@@ -224,6 +231,11 @@ export type ProductsPage = {
   surtitle?: string;
   title?: string;
   subtitle?: string;
+  categoryOrder?: Array<
+    {
+      _key: string;
+    } & ProductCategoryReference
+  >;
   seo?: SeoMeta;
 };
 
@@ -245,7 +257,18 @@ export type Product = {
     alt?: string;
     _type: "image";
   };
-  category?: "Pains" | "Viennoiseries" | "P\xE2tisseries" | "Traiteur";
+  category?: ProductCategoryReference;
+};
+
+export type ProductCategory = {
+  _id: string;
+  _type: "productCategory";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  iconName?: string;
 };
 
 export type Slug = {
@@ -480,8 +503,10 @@ export type AllSanitySchemaTypes =
   | AboutPage
   | SanityImageCrop
   | SanityImageHotspot
+  | ProductCategoryReference
   | ProductsPage
   | Product
+  | ProductCategory
   | Slug
   | ProductReference
   | HomePage
@@ -537,7 +562,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       alt: string | null;
       _type: "image";
     } | null;
-    category: "Pains" | "P\xE2tisseries" | "Traiteur" | "Viennoiseries" | null;
+    category: ProductCategoryReference | null;
   }> | null;
   aboutSurtitle: string | null;
   aboutTitle: string | null;
