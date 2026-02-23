@@ -1,9 +1,11 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
+import { Croissant } from 'lucide-react';
 
 export const productType = defineType({
   name: 'product',
   title: 'Product',
   type: 'document',
+  icon: Croissant,
   fields: [
     defineField({
       name: 'name',
@@ -19,16 +21,29 @@ export const productType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+    }),
+    defineField({
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+      description: 'Prix en euros (ex. : 3.5).',
+    }),
+    defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',
       description: 'Short description shown on the product card.',
     }),
     defineField({
-      name: 'price',
-      title: 'Price',
-      type: 'string',
-      description: 'e.g. "3,50 €"',
+      name: 'description',
+      title: 'Description',
+      type: 'array',
+      of: [defineArrayMember({ type: 'block' })],
+      description: 'Description complète affichée sur la page détail du produit.',
     }),
     defineField({
       name: 'image',
@@ -45,22 +60,8 @@ export const productType = defineType({
       ],
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'category',
-      title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Pains', value: 'Pains' },
-          { title: 'Viennoiseries', value: 'Viennoiseries' },
-          { title: 'Pâtisseries', value: 'Pâtisseries' },
-          { title: 'Traiteur', value: 'Traiteur' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
   ],
   preview: {
-    select: { title: 'name', subtitle: 'category', media: 'image' },
+    select: { title: 'name', subtitle: 'category.name', media: 'image' },
   },
 });

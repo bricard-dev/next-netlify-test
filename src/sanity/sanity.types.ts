@@ -215,6 +215,13 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+export type CategoryReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "category";
+};
+
 export type ProductsPage = {
   _id: string;
   _type: "productsPage";
@@ -224,6 +231,11 @@ export type ProductsPage = {
   surtitle?: string;
   title?: string;
   subtitle?: string;
+  categorySections?: Array<
+    {
+      _key: string;
+    } & CategoryReference
+  >;
   seo?: SeoMeta;
 };
 
@@ -235,8 +247,27 @@ export type Product = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  category?: CategoryReference;
+  price?: number;
   tagline?: string;
-  price?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   image?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -245,13 +276,22 @@ export type Product = {
     alt?: string;
     _type: "image";
   };
-  category?: "Pains" | "Viennoiseries" | "P\xE2tisseries" | "Traiteur";
 };
 
 export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  tagline?: string;
 };
 
 export type ProductReference = {
@@ -480,9 +520,11 @@ export type AllSanitySchemaTypes =
   | AboutPage
   | SanityImageCrop
   | SanityImageHotspot
+  | CategoryReference
   | ProductsPage
   | Product
   | Slug
+  | Category
   | ProductReference
   | HomePage
   | Settings
@@ -528,7 +570,7 @@ export type HOME_PAGE_QUERY_RESULT = {
     name: string | null;
     slug: Slug | null;
     tagline: string | null;
-    price: string | null;
+    price: number | null;
     image: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -537,7 +579,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       alt: string | null;
       _type: "image";
     } | null;
-    category: "Pains" | "P\xE2tisseries" | "Traiteur" | "Viennoiseries" | null;
+    category: CategoryReference | null;
   }> | null;
   aboutSurtitle: string | null;
   aboutTitle: string | null;
@@ -616,6 +658,84 @@ export type HOME_PAGE_QUERY_RESULT = {
     alt: string | null;
     _type: "image";
     _key: string;
+  }> | null;
+} | null;
+
+// Source: src/sanity/queries/product.ts
+// Variable: PRODUCT_BY_SLUG_QUERY
+// Query: *[_type == "product" && slug.current == $slug][0]{  _id,  name,  slug,  price,  tagline,  description,  image{ ..., alt },  category->{    _id,    name,    tagline  }}
+export type PRODUCT_BY_SLUG_QUERY_RESULT = {
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  price: number | null;
+  tagline: string | null;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string | null;
+    _type: "image";
+  } | null;
+  category: {
+    _id: string;
+    name: string | null;
+    tagline: string | null;
+  } | null;
+} | null;
+
+// Source: src/sanity/queries/product.ts
+// Variable: PRODUCT_SLUGS_QUERY
+// Query: *[_type == "product" && defined(slug.current)]{  "slug": slug.current}
+export type PRODUCT_SLUGS_QUERY_RESULT = Array<{
+  slug: string | null;
+}>;
+
+// Source: src/sanity/queries/products-page.ts
+// Variable: PRODUCTS_PAGE_QUERY
+// Query: *[_type == "productsPage" && _id == "productsPage"][0]{  surtitle,  title,  subtitle,  "categorySections": categorySections[]->{    _id,    name,    tagline,    "products": *[_type == "product" && category._ref == ^._id]{      _id,      name,      slug,      price,      tagline,      image{ ..., alt }    }  }}
+export type PRODUCTS_PAGE_QUERY_RESULT = {
+  surtitle: string | null;
+  title: string | null;
+  subtitle: string | null;
+  categorySections: Array<{
+    _id: string;
+    name: string | null;
+    tagline: string | null;
+    products: Array<{
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      price: number | null;
+      tagline: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+    }>;
   }> | null;
 } | null;
 

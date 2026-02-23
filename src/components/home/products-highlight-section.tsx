@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import type { HomePageData } from "@/sanity/queries/home-page";
 import Link from "next/link";
-import { ProductCard } from "./product-card";
+import { ProductCard } from "@/components/ui/product-card";
 
 type Props = {
   data: HomePageData;

@@ -1,10 +1,12 @@
 import {
+  Croissant,
   HatGlasses,
   Home,
   Landmark,
   Mail,
   Scale,
   Settings,
+  Store,
   Tag,
 } from "lucide-react";
 import type { StructureResolver } from "sanity/structure";
@@ -18,6 +20,8 @@ const SINGLETONS = [
   "contactPage",
   "privacyPage",
   "legalNoticePage",
+  "product",
+  "category",
 ];
 
 export const structure: StructureResolver = (S) =>
@@ -57,7 +61,7 @@ export const structure: StructureResolver = (S) =>
         .id("productsPage")
         .schemaType("productsPage")
         .title("Products Page")
-        .icon(Tag)
+        .icon(Store)
         .child(
           S.document()
             .schemaType("productsPage")
@@ -121,8 +125,7 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
-      // Tous les autres types de documents (filtrés pour exclure les singletons)
-      ...S.documentTypeListItems().filter(
-        (listItem) => !SINGLETONS.includes(listItem.getId() as string),
-      ),
+      // Catalogue
+      S.documentTypeListItem("category").title("Categories").icon(Tag),
+      S.documentTypeListItem("product").title("Products").icon(Croissant),
     ]);

@@ -3,7 +3,7 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { schemaTypes } from "@/sanity/schema-types";
 import { projectId, dataset } from "@/sanity/env";
-import { structure } from "@/structure";
+import { structure } from "@/sanity/structure";
 
 export default defineConfig({
   name: "default",
