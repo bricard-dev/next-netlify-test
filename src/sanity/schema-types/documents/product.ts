@@ -1,11 +1,11 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { BasketIcon } from '@sanity/icons';
+import { Croissant } from 'lucide-react';
 
 export const productType = defineType({
   name: 'product',
   title: 'Product',
   type: 'document',
-  icon: BasketIcon,
+  icon: Croissant,
   fields: [
     defineField({
       name: 'name',
