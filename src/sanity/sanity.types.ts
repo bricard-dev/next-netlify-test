@@ -215,11 +215,11 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
-export type ProductCategoryReference = {
+export type CategoryReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "productCategory";
+  [internalGroqTypeReferenceTo]?: "category";
 };
 
 export type ProductsPage = {
@@ -231,10 +231,10 @@ export type ProductsPage = {
   surtitle?: string;
   title?: string;
   subtitle?: string;
-  categoryOrder?: Array<
+  categorySections?: Array<
     {
       _key: string;
-    } & ProductCategoryReference
+    } & CategoryReference
   >;
   seo?: SeoMeta;
 };
@@ -247,8 +247,27 @@ export type Product = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  category?: CategoryReference;
+  price?: number;
   tagline?: string;
-  price?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   image?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -257,24 +276,22 @@ export type Product = {
     alt?: string;
     _type: "image";
   };
-  category?: ProductCategoryReference;
-};
-
-export type ProductCategory = {
-  _id: string;
-  _type: "productCategory";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  iconName?: string;
 };
 
 export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  tagline?: string;
 };
 
 export type ProductReference = {
@@ -503,11 +520,11 @@ export type AllSanitySchemaTypes =
   | AboutPage
   | SanityImageCrop
   | SanityImageHotspot
-  | ProductCategoryReference
+  | CategoryReference
   | ProductsPage
   | Product
-  | ProductCategory
   | Slug
+  | Category
   | ProductReference
   | HomePage
   | Settings
@@ -553,7 +570,7 @@ export type HOME_PAGE_QUERY_RESULT = {
     name: string | null;
     slug: Slug | null;
     tagline: string | null;
-    price: string | null;
+    price: number | null;
     image: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -562,7 +579,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       alt: string | null;
       _type: "image";
     } | null;
-    category: ProductCategoryReference | null;
+    category: CategoryReference | null;
   }> | null;
   aboutSurtitle: string | null;
   aboutTitle: string | null;

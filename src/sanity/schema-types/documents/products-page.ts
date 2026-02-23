@@ -29,6 +29,14 @@ export const productsPageType = defineType({
       group: 'content',
     }),
     defineField({
+      name: 'categorySections',
+      title: 'Sections par catégorie',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'category' }] }],
+      description: 'Sélectionne les catégories à afficher et glisse pour réordonner les sections.',
+      group: 'content',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seoMeta',
