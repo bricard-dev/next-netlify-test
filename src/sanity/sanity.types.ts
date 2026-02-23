@@ -661,6 +661,35 @@ export type HOME_PAGE_QUERY_RESULT = {
   }> | null;
 } | null;
 
+// Source: src/sanity/queries/products-page.ts
+// Variable: PRODUCTS_PAGE_QUERY
+// Query: *[_type == "productsPage" && _id == "productsPage"][0]{  surtitle,  title,  subtitle,  "categorySections": categorySections[]->{    _id,    name,    tagline,    "products": *[_type == "product" && category._ref == ^._id]{      _id,      name,      slug,      price,      tagline,      image{ ..., alt }    }  }}
+export type PRODUCTS_PAGE_QUERY_RESULT = {
+  surtitle: string | null;
+  title: string | null;
+  subtitle: string | null;
+  categorySections: Array<{
+    _id: string;
+    name: string | null;
+    tagline: string | null;
+    products: Array<{
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      price: number | null;
+      tagline: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+    }>;
+  }> | null;
+} | null;
+
 // Source: src/sanity/queries/settings.ts
 // Variable: SETTINGS_QUERY
 // Query: *[_type == "settings" && _id == "settings"][0]{  bakeryName,  instagramUrl,  address,  phone,  email,  hours {    monday { isOpen, open, close },    tuesday { isOpen, open, close },    wednesday { isOpen, open, close },    thursday { isOpen, open, close },    friday { isOpen, open, close },    saturday { isOpen, open, close },    sunday { isOpen, open, close }  },  seo {    title,    description  }}
