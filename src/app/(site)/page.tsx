@@ -8,7 +8,7 @@ import { ServicesSection } from "@/components/home/services-section";
 import { getHomePageData } from "@/sanity/queries/home-page";
 import { getSiteSettings } from "@/sanity/queries/settings";
 
-export default async function Home() {
+export default async function ProductsPage() {
   const [data, settings] = await Promise.all([
     getHomePageData(),
     getSiteSettings(),

@@ -1,5 +1,6 @@
 import { defineQuery } from 'next-sanity';
 import { sanityFetch } from '@/sanity/live';
+import { client } from '@/sanity/client';
 import type {
   PRODUCT_BY_SLUG_QUERY_RESULT,
   PRODUCT_SLUGS_QUERY_RESULT,
@@ -41,6 +42,5 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function getProductSlugs() {
-  const { data } = await sanityFetch({ query: PRODUCT_SLUGS_QUERY });
-  return data;
+  return client.fetch<ProductSlugsData>(PRODUCT_SLUGS_QUERY);
 }
