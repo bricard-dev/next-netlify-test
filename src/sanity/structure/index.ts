@@ -6,6 +6,7 @@ import {
   Mail,
   Scale,
   Settings,
+  Store,
   Tag,
 } from "lucide-react";
 import type { StructureResolver } from "sanity/structure";
@@ -60,7 +61,7 @@ export const structure: StructureResolver = (S) =>
         .id("productsPage")
         .schemaType("productsPage")
         .title("Products Page")
-        .icon(Tag)
+        .icon(Store)
         .child(
           S.document()
             .schemaType("productsPage")
