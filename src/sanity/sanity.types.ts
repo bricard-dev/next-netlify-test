@@ -661,6 +661,55 @@ export type HOME_PAGE_QUERY_RESULT = {
   }> | null;
 } | null;
 
+// Source: src/sanity/queries/product.ts
+// Variable: PRODUCT_BY_SLUG_QUERY
+// Query: *[_type == "product" && slug.current == $slug][0]{  _id,  name,  slug,  price,  tagline,  description,  image{ ..., alt },  category->{    _id,    name,    tagline  }}
+export type PRODUCT_BY_SLUG_QUERY_RESULT = {
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  price: number | null;
+  tagline: string | null;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string | null;
+    _type: "image";
+  } | null;
+  category: {
+    _id: string;
+    name: string | null;
+    tagline: string | null;
+  } | null;
+} | null;
+
+// Source: src/sanity/queries/product.ts
+// Variable: PRODUCT_SLUGS_QUERY
+// Query: *[_type == "product" && defined(slug.current)]{  "slug": slug.current}
+export type PRODUCT_SLUGS_QUERY_RESULT = Array<{
+  slug: string | null;
+}>;
+
 // Source: src/sanity/queries/products-page.ts
 // Variable: PRODUCTS_PAGE_QUERY
 // Query: *[_type == "productsPage" && _id == "productsPage"][0]{  surtitle,  title,  subtitle,  "categorySections": categorySections[]->{    _id,    name,    tagline,    "products": *[_type == "product" && category._ref == ^._id]{      _id,      name,      slug,      price,      tagline,      image{ ..., alt }    }  }}
