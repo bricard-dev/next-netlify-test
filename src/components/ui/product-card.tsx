@@ -56,9 +56,12 @@ const ProductCard = React.forwardRef<HTMLAnchorElement, ProductCardProps>(
               {tagline}
             </p>
           )}
-          {price && (
+          {price != null && (
             <p className="text-primary mt-auto pt-2 font-sans text-sm font-semibold">
-              {price} €
+              {price.toLocaleString("fr-FR", {
+                style: "currency",
+                currency: "EUR",
+              })}
             </p>
           )}
         </div>
