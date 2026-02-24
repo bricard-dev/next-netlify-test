@@ -12,11 +12,11 @@ function MemberCard({ member }: { member: TeamMember }) {
       <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted">
         {member.photo ? (
           <Image
-            src={urlFor(member.photo).width(400).height(400).url()}
+            src={urlFor(member.photo).width(800).height(800).url()}
             alt={member.photo.alt ?? member.name ?? ""}
             fill
             className="object-cover"
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            sizes="(max-width: 640px) 50vw, 33vw"
           />
         ) : (
           <div className="flex h-full items-center justify-center">
@@ -57,7 +57,7 @@ export function TeamSection({ data }: Props) {
       <div
         className={cn(
           "grid grid-cols-2 gap-8",
-          team.length >= 4 ? "lg:grid-cols-4" : "lg:mx-auto lg:max-w-3xl lg:grid-cols-3"
+          team.length >= 3 ? "lg:grid-cols-3" : "lg:mx-auto lg:max-w-xl lg:grid-cols-2"
         )}
       >
         {team.map((member) => (
