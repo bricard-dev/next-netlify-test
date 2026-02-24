@@ -20,6 +20,34 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type TeamMember = {
+  _type: "teamMember";
+  name?: string;
+  role?: string;
+  photo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
+export type ValueItem = {
+  _type: "valueItem";
+  iconName?: string;
+  title?: string;
+  description?: string;
+};
+
+export type AwardItem = {
+  _type: "awardItem";
+  year?: string;
+  competition?: string;
+  title?: string;
+};
+
 export type ReviewItem = {
   _type: "reviewItem";
   name?: string;
@@ -177,25 +205,38 @@ export type AboutPage = {
   heroSurtitle?: string;
   heroTitle?: string;
   heroSubtitle?: string;
-  heroImage?: {
+  histoireSurtitle?: string;
+  histoireTitle?: string;
+  histoireContent?: string;
+  histoirePhoto?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
-  storySurtitle?: string;
-  storyTitle?: string;
-  storyContent?: string;
-  storyPhotos?: Array<{
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  storyCta?: Cta;
+  recompensesSurtitle?: string;
+  recompensesTitle?: string;
+  awards?: Array<
+    {
+      _key: string;
+    } & AwardItem
+  >;
+  valeursSurtitle?: string;
+  valeursTitle?: string;
+  values?: Array<
+    {
+      _key: string;
+    } & ValueItem
+  >;
+  equipeSurtitle?: string;
+  equipeTitle?: string;
+  team?: Array<
+    {
+      _key: string;
+    } & TeamMember
+  >;
   seo?: SeoMeta;
 };
 
@@ -506,6 +547,9 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
+  | TeamMember
+  | ValueItem
+  | AwardItem
   | ReviewItem
   | ServiceItem
   | SeoMeta
@@ -546,19 +590,48 @@ export type ABOUT_PAGE_QUERY_RESULT = {
   heroSurtitle: string | null;
   heroTitle: string | null;
   heroSubtitle: string | null;
-  histoireSurtitle: null;
-  histoireTitle: null;
-  histoireContent: null;
-  histoirePhoto: null;
-  recompensesSurtitle: null;
-  recompensesTitle: null;
-  awards: null;
-  valeursSurtitle: null;
-  valeursTitle: null;
-  values: null;
-  equipeSurtitle: null;
-  equipeTitle: null;
-  team: null;
+  histoireSurtitle: string | null;
+  histoireTitle: string | null;
+  histoireContent: string | null;
+  histoirePhoto: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string | null;
+    _type: "image";
+  } | null;
+  recompensesSurtitle: string | null;
+  recompensesTitle: string | null;
+  awards: Array<{
+    _key: string;
+    year: string | null;
+    competition: string | null;
+    title: string | null;
+  }> | null;
+  valeursSurtitle: string | null;
+  valeursTitle: string | null;
+  values: Array<{
+    _key: string;
+    iconName: string | null;
+    title: string | null;
+    description: string | null;
+  }> | null;
+  equipeSurtitle: string | null;
+  equipeTitle: string | null;
+  team: Array<{
+    _key: string;
+    name: string | null;
+    role: string | null;
+    photo: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "image";
+    } | null;
+  }> | null;
 } | null;
 
 // Source: src/sanity/queries/home-page.ts
