@@ -539,6 +539,28 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
+// Source: src/sanity/queries/about-page.ts
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{  heroSurtitle,  heroTitle,  heroSubtitle,  histoireSurtitle,  histoireTitle,  histoireContent,  histoirePhoto{ ..., alt },  recompensesSurtitle,  recompensesTitle,  awards[]{    _key,    year,    competition,    title  },  valeursSurtitle,  valeursTitle,  values[]{    _key,    iconName,    title,    description  },  equipeSurtitle,  equipeTitle,  team[]{    _key,    name,    role,    photo{ ..., alt }  }}
+export type ABOUT_PAGE_QUERY_RESULT = {
+  heroSurtitle: string | null;
+  heroTitle: string | null;
+  heroSubtitle: string | null;
+  histoireSurtitle: null;
+  histoireTitle: null;
+  histoireContent: null;
+  histoirePhoto: null;
+  recompensesSurtitle: null;
+  recompensesTitle: null;
+  awards: null;
+  valeursSurtitle: null;
+  valeursTitle: null;
+  values: null;
+  equipeSurtitle: null;
+  equipeTitle: null;
+  team: null;
+} | null;
+
 // Source: src/sanity/queries/home-page.ts
 // Variable: HOME_PAGE_QUERY
 // Query: *[_type == "homePage" && _id == "homePage"][0]{  heroSurtitle,  heroTitle,  heroSubtitle,  heroImage{ ..., alt },  heroPrimaryCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  heroSecondaryCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  productsSurtitle,  productsTitle,  productsSubtitle,  featuredProducts[]->{    _id,    name,    slug,    tagline,    price,    image{ ..., alt },    category  },  aboutSurtitle,  aboutTitle,  aboutDescription,  aboutCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  aboutPhoto{ ..., alt },  locationSurtitle,  locationTitle,  locationDescription,  locationPhoto{ ..., alt },  locationCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  servicesItems[]{    _key,    iconName,    title,    description  },  reviewsSurtitle,  reviewsTitle,  reviewsItems[]{    _key,    name,    source,    avatar,    rating,    text  },  galleryImages[]{ ..., alt }}
