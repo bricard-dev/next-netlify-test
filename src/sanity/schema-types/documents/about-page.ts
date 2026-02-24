@@ -1,88 +1,151 @@
-import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from "sanity";
 
 export const aboutPageType = defineType({
-  name: 'aboutPage',
-  title: 'About Page',
-  type: 'document',
+  name: "aboutPage",
+  title: "About Page",
+  type: "document",
   groups: [
-    { name: 'hero', title: 'Hero', default: true },
-    { name: 'story', title: 'Story' },
-    { name: 'seo', title: 'SEO' },
+    { name: "hero", title: "Hero", default: true },
+    { name: "histoire", title: "Notre Histoire" },
+    { name: "recompenses", title: "Récompenses" },
+    { name: "valeurs", title: "Nos Valeurs" },
+    { name: "equipe", title: "Équipe" },
+    { name: "seo", title: "SEO" },
   ],
   fields: [
     // ─── Hero ────────────────────────────────────────────────────────────────
     defineField({
-      name: 'heroSurtitle',
-      title: 'Hero Surtitle',
-      type: 'string',
-      group: 'hero',
+      name: "heroSurtitle",
+      title: "Hero Surtitle",
+      type: "string",
+      group: "hero",
     }),
     defineField({
-      name: 'heroTitle',
-      title: 'Hero Title',
-      type: 'string',
-      group: 'hero',
+      name: "heroTitle",
+      title: "Hero Title",
+      type: "string",
+      group: "hero",
     }),
     defineField({
-      name: 'heroSubtitle',
-      title: 'Hero Subtitle',
-      type: 'text',
+      name: "heroSubtitle",
+      title: "Hero Subtitle",
+      type: "text",
       rows: 2,
-      group: 'hero',
-    }),
-    defineField({
-      name: 'heroImage',
-      title: 'Hero Image',
-      type: 'image',
-      options: { hotspot: true },
-      group: 'hero',
+      group: "hero",
     }),
 
-    // ─── Story ────────────────────────────────────────────────────────────────
+    // ─── Notre Histoire ───────────────────────────────────────────────────────
     defineField({
-      name: 'storySurtitle',
-      title: 'Story Surtitle',
-      type: 'string',
-      group: 'story',
+      name: "histoireSurtitle",
+      title: "Surtitle",
+      type: "string",
+      group: "histoire",
     }),
     defineField({
-      name: 'storyTitle',
-      title: 'Story Title',
-      type: 'string',
-      group: 'story',
+      name: "histoireTitle",
+      title: "Titre",
+      type: "string",
+      group: "histoire",
     }),
     defineField({
-      name: 'storyContent',
-      title: 'Story Content',
-      type: 'text',
+      name: "histoireContent",
+      title: "Contenu",
+      type: "text",
       rows: 6,
-      group: 'story',
+      group: "histoire",
     }),
     defineField({
-      name: 'storyPhotos',
-      title: 'Story Photos',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
-      group: 'story',
+      name: "histoirePhoto",
+      title: "Photo",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Texte alternatif",
+          type: "string",
+          description: "Décrit l'image pour les lecteurs d'écran et les moteurs de recherche.",
+        }),
+      ],
+      group: "histoire",
+    }),
+
+    // ─── Récompenses ─────────────────────────────────────────────────────────
+    defineField({
+      name: "recompensesSurtitle",
+      title: "Surtitle",
+      type: "string",
+      group: "recompenses",
     }),
     defineField({
-      name: 'storyCta',
-      title: 'Story CTA',
-      type: 'cta',
-      group: 'story',
+      name: "recompensesTitle",
+      title: "Titre",
+      type: "string",
+      group: "recompenses",
+    }),
+    defineField({
+      name: "awards",
+      title: "Récompenses",
+      type: "array",
+      of: [{ type: "awardItem" }],
+      group: "recompenses",
+    }),
+
+    // ─── Nos Valeurs ──────────────────────────────────────────────────────────
+    defineField({
+      name: "valeursSurtitle",
+      title: "Surtitle",
+      type: "string",
+      group: "valeurs",
+    }),
+    defineField({
+      name: "valeursTitle",
+      title: "Titre",
+      type: "string",
+      group: "valeurs",
+    }),
+    defineField({
+      name: "values",
+      title: "Valeurs",
+      type: "array",
+      of: [{ type: "valueItem" }],
+      description: "3 valeurs minimum, 4 maximum.",
+      validation: (rule) => rule.min(3).max(4),
+      group: "valeurs",
+    }),
+
+    // ─── Équipe ───────────────────────────────────────────────────────────────
+    defineField({
+      name: "equipeSurtitle",
+      title: "Surtitle",
+      type: "string",
+      group: "equipe",
+    }),
+    defineField({
+      name: "equipeTitle",
+      title: "Titre",
+      type: "string",
+      group: "equipe",
+    }),
+    defineField({
+      name: "team",
+      title: "Membres de l'équipe",
+      type: "array",
+      of: [{ type: "teamMember" }],
+      group: "equipe",
     }),
 
     // ─── SEO ──────────────────────────────────────────────────────────────────
     defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'seoMeta',
-      group: 'seo',
+      name: "seo",
+      title: "SEO",
+      type: "seoMeta",
+      group: "seo",
     }),
   ],
   preview: {
     prepare() {
-      return { title: 'About Page' };
+      return { title: "About Page" };
     },
   },
 });
