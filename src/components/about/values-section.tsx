@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
 import type { AboutPageData, ValueItem } from "@/sanity/queries/about-page";
 import {
   Award,
@@ -68,8 +69,15 @@ export function ValuesSection({ data }: Props) {
         {valeursTitle && <h2 className="section-title">{valeursTitle}</h2>}
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+      {/* Grid — centré si moins de 4 valeurs */}
+      <div
+        className={cn(
+          "grid gap-8",
+          values.length >= 4
+            ? "lg:grid-cols-4"
+            : "lg:mx-auto lg:max-w-3xl lg:grid-cols-3",
+        )}
+      >
         {values.map((item) => (
           <ValueCard key={item._key} item={item} />
         ))}
