@@ -1,12 +1,22 @@
 import { Section } from "@/components/ui/section";
+import { urlFor } from "@/sanity/image";
 import { getAboutPageData } from "@/sanity/queries/about-page";
+import Image from "next/image";
 
 export default async function AboutPage() {
   const data = await getAboutPageData();
 
   if (!data) return null;
 
-  const { heroSurtitle, heroTitle, heroSubtitle } = data;
+  const {
+    heroSurtitle,
+    heroTitle,
+    heroSubtitle,
+    histoireSurtitle,
+    histoireTitle,
+    histoireContent,
+    histoirePhoto,
+  } = data;
 
   return (
     <>
@@ -29,6 +39,39 @@ export default async function AboutPage() {
             </p>
           )}
         </div>
+      </Section>
+
+      {/* Notre Histoire */}
+      <Section innerClassName="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        {/* Text */}
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
+            {histoireSurtitle && (
+              <p className="section-surtitle">{histoireSurtitle}</p>
+            )}
+            {histoireTitle && (
+              <h2 className="section-title">{histoireTitle}</h2>
+            )}
+          </div>
+          {histoireContent && (
+            <p className="section-description whitespace-pre-line">
+              {histoireContent}
+            </p>
+          )}
+        </div>
+
+        {/* Photo */}
+        {histoirePhoto && (
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+            <Image
+              src={urlFor(histoirePhoto).width(800).url()}
+              alt={histoirePhoto.alt ?? histoireTitle ?? "Notre histoire"}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        )}
       </Section>
     </>
   );
