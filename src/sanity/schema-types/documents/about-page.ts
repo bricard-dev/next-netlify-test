@@ -50,8 +50,19 @@ export const aboutPageType = defineType({
     defineField({
       name: "histoireContent",
       title: "Contenu",
-      type: "text",
-      rows: 6,
+      type: "array",
+      of: [
+        {
+          type: "block",
+          styles: [{ title: "Normal", value: "normal" }],
+          marks: {
+            decorators: [
+              { title: "Bold", value: "strong" },
+              { title: "Italic", value: "em" },
+            ],
+          },
+        },
+      ],
       group: "histoire",
     }),
     defineField({

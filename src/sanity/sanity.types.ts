@@ -207,7 +207,24 @@ export type AboutPage = {
   heroSubtitle?: string;
   histoireSurtitle?: string;
   histoireTitle?: string;
-  histoireContent?: string;
+  histoireContent?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   histoirePhoto?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -592,7 +609,24 @@ export type ABOUT_PAGE_QUERY_RESULT = {
   heroSubtitle: string | null;
   histoireSurtitle: string | null;
   histoireTitle: string | null;
-  histoireContent: string | null;
+  histoireContent: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
   histoirePhoto: {
     asset?: SanityImageAssetReference;
     media?: unknown;
