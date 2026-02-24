@@ -205,9 +205,9 @@ export type AboutPage = {
   heroSurtitle?: string;
   heroTitle?: string;
   heroSubtitle?: string;
-  histoireSurtitle?: string;
-  histoireTitle?: string;
-  histoireContent?: Array<{
+  storySurtitle?: string;
+  storyTitle?: string;
+  storyContent?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -225,7 +225,7 @@ export type AboutPage = {
     _type: "block";
     _key: string;
   }>;
-  histoirePhoto?: {
+  storyPhoto?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
@@ -602,14 +602,14 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: src/sanity/queries/about-page.ts
 // Variable: ABOUT_PAGE_QUERY
-// Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{  heroSurtitle,  heroTitle,  heroSubtitle,  histoireSurtitle,  histoireTitle,  histoireContent,  histoirePhoto{ ..., alt },  recompensesSurtitle,  recompensesTitle,  awards[]{    _key,    year,    competition,    title  },  valeursSurtitle,  valeursTitle,  values[]{    _key,    iconName,    title,    description  },  equipeSurtitle,  equipeTitle,  team[]{    _key,    name,    role,    photo{ ..., alt }  }}
+// Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{  heroSurtitle,  heroTitle,  heroSubtitle,  storySurtitle,  storyTitle,  storyContent,  storyPhoto{ ..., alt },  recompensesSurtitle,  recompensesTitle,  awards[]{    _key,    year,    competition,    title  },  valeursSurtitle,  valeursTitle,  values[]{    _key,    iconName,    title,    description  },  equipeSurtitle,  equipeTitle,  team[]{    _key,    name,    role,    photo{ ..., alt }  }}
 export type ABOUT_PAGE_QUERY_RESULT = {
   heroSurtitle: string | null;
   heroTitle: string | null;
   heroSubtitle: string | null;
-  histoireSurtitle: string | null;
-  histoireTitle: string | null;
-  histoireContent: Array<{
+  storySurtitle: string | null;
+  storyTitle: string | null;
+  storyContent: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -627,7 +627,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
     _type: "block";
     _key: string;
   }> | null;
-  histoirePhoto: {
+  storyPhoto: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;

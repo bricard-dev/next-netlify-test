@@ -16,10 +16,10 @@ export const ABOUT_PAGE_QUERY = defineQuery(`*[_type == "aboutPage" && _id == "a
   heroTitle,
   heroSubtitle,
 
-  histoireSurtitle,
-  histoireTitle,
-  histoireContent,
-  histoirePhoto{ ..., alt },
+  storySurtitle,
+  storyTitle,
+  storyContent,
+  storyPhoto{ ..., alt },
 
   recompensesSurtitle,
   recompensesTitle,

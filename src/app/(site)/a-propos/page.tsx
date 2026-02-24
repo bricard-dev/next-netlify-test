@@ -1,5 +1,5 @@
 import { HeroSection } from "@/components/about/hero-section";
-import { HistoireSection } from "@/components/about/histoire-section";
+import { StorySection } from "@/components/about/story-section";
 import { getAboutPageData } from "@/sanity/queries/about-page";
 
 export default async function AboutPage() {
@@ -10,7 +10,7 @@ export default async function AboutPage() {
   return (
     <>
       <HeroSection data={data} />
-      <HistoireSection data={data} />
+      <StorySection data={data} />
     </>
   );
 }

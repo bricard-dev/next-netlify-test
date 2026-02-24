@@ -6,7 +6,7 @@ export const aboutPageType = defineType({
   type: "document",
   groups: [
     { name: "hero", title: "Hero", default: true },
-    { name: "histoire", title: "Notre Histoire" },
+    { name: "story", title: "Notre Histoire" },
     { name: "recompenses", title: "Récompenses" },
     { name: "valeurs", title: "Nos Valeurs" },
     { name: "equipe", title: "Équipe" },
@@ -36,19 +36,19 @@ export const aboutPageType = defineType({
 
     // ─── Notre Histoire ───────────────────────────────────────────────────────
     defineField({
-      name: "histoireSurtitle",
+      name: "storySurtitle",
       title: "Surtitle",
       type: "string",
-      group: "histoire",
+      group: "story",
     }),
     defineField({
-      name: "histoireTitle",
+      name: "storyTitle",
       title: "Titre",
       type: "string",
-      group: "histoire",
+      group: "story",
     }),
     defineField({
-      name: "histoireContent",
+      name: "storyContent",
       title: "Contenu",
       type: "array",
       of: [
@@ -63,10 +63,10 @@ export const aboutPageType = defineType({
           },
         },
       ],
-      group: "histoire",
+      group: "story",
     }),
     defineField({
-      name: "histoirePhoto",
+      name: "storyPhoto",
       title: "Photo",
       type: "image",
       options: { hotspot: true },
@@ -78,7 +78,7 @@ export const aboutPageType = defineType({
           description: "Décrit l'image pour les lecteurs d'écran et les moteurs de recherche.",
         }),
       ],
-      group: "histoire",
+      group: "story",
     }),
 
     // ─── Récompenses ─────────────────────────────────────────────────────────
