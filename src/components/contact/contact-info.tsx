@@ -28,7 +28,7 @@ function InfoItem({
         <Icon className="h-4 w-4" />
       </div>
       <div>
-        <p className="text-muted-foreground text-sm">{label}</p>
+        <p className="text-sm font-medium">{label}</p>
         {children}
       </div>
     </div>
@@ -50,13 +50,13 @@ const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(
         <div className="space-y-5">
           {settings?.address && (
             <InfoItem icon={MapPin} label="Adresse">
-              <p className="font-medium">{settings.address}</p>
+              <p className="text-muted-foreground">{settings.address}</p>
             </InfoItem>
           )}
 
           {settings?.phone && (
             <InfoItem icon={Phone} label="Téléphone">
-              <p className="font-medium">{settings.phone}</p>
+              <p className="text-muted-foreground">{settings.phone}</p>
             </InfoItem>
           )}
 
@@ -64,7 +64,7 @@ const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(
             <InfoItem icon={Clock} label="Horaires">
               <div>
                 {groupedHours.map(({ days, formatted }) => (
-                  <p key={days} className="font-medium">
+                  <p key={days} className="text-muted-foreground">
                     {days} : {formatted}
                   </p>
                 ))}
@@ -74,7 +74,7 @@ const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(
 
           {settings?.email && (
             <InfoItem icon={Mail} label="Email">
-              <p className="font-medium">{settings.email}</p>
+              <p className="text-muted-foreground">{settings.email}</p>
             </InfoItem>
           )}
         </div>
