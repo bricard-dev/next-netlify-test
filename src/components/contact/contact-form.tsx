@@ -104,7 +104,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
             }}
           >
             {(field) => (
-              <div className="space-y-1.5">
+              <div className="space-y-2.5">
                 <Label htmlFor={field.name}>Nom</Label>
                 <Input
                   id={field.name}
@@ -134,7 +134,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
             }}
           >
             {(field) => (
-              <div className="space-y-1.5">
+              <div className="space-y-2.5">
                 <Label htmlFor={field.name}>Email</Label>
                 <Input
                   id={field.name}
@@ -165,7 +165,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
             }}
           >
             {(field) => (
-              <div className="space-y-1.5">
+              <div className="space-y-2.5">
                 <Label htmlFor={field.name}>Objet</Label>
                 <Input
                   id={field.name}
@@ -195,7 +195,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
             }}
           >
             {(field) => (
-              <div className="space-y-1.5">
+              <div className="space-y-2.5">
                 <Label htmlFor={field.name}>Message</Label>
                 <Textarea
                   id={field.name}
