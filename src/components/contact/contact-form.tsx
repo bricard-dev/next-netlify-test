@@ -210,7 +210,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   placeholder="Votre message…"
-                  rows={8}
+                  rows={5}
                   aria-invalid={field.state.meta.errors.length > 0}
                   aria-describedby={`${field.name}-error`}
                 />
