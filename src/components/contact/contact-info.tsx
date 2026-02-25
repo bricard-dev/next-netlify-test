@@ -1,7 +1,8 @@
 import * as React from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { WEEKDAY_KEYS, WEEKDAY_NAMES, formatDaySchedule } from "@/lib/schedule";
+import { getGroupedWeekSchedule } from "@/lib/schedule";
+import type { SiteSettings } from "@/sanity/queries/settings";
 import type { ContactPageData } from "@/sanity/queries/contact-page";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -15,13 +16,12 @@ interface ContactInfoProps extends React.HTMLAttributes<HTMLDivElement> {
 function InfoItem({
   icon: Icon,
   label,
-  value,
+  children,
 }: {
   icon: React.ElementType;
   label: string;
-  value: string | null;
+  children: React.ReactNode;
 }) {
-  if (!value) return null;
   return (
     <div className="flex items-start gap-3">
       <div className="bg-primary/10 text-primary mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full">
@@ -29,7 +29,7 @@ function InfoItem({
       </div>
       <div>
         <p className="text-muted-foreground text-sm">{label}</p>
-        <p className="font-medium">{value}</p>
+        {children}
       </div>
     </div>
   );
@@ -40,71 +40,44 @@ function InfoItem({
 const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(
   ({ className, data, ...props }, ref) => {
     const { settings } = data;
-    const hours = settings?.hours ?? null;
+    const groupedHours = getGroupedWeekSchedule(
+      settings as unknown as SiteSettings
+    );
 
     return (
-      <div ref={ref} className={cn("space-y-10", className)} {...props}>
-        {/* ── Coordonnées ── */}
-        <div className="space-y-6">
-          <h2 className="font-serif text-2xl font-semibold">Nous trouver</h2>
-          <div className="space-y-5">
-            <InfoItem
-              icon={MapPin}
-              label="Adresse"
-              value={settings?.address ?? null}
-            />
-            <InfoItem
-              icon={Phone}
-              label="Téléphone"
-              value={settings?.phone ?? null}
-            />
-            <InfoItem
-              icon={Mail}
-              label="Email"
-              value={settings?.email ?? null}
-            />
-          </div>
-        </div>
+      <div ref={ref} className={cn("space-y-6", className)} {...props}>
+        <h2 className="font-serif text-2xl font-semibold">Nous trouver</h2>
+        <div className="space-y-5">
+          {settings?.address && (
+            <InfoItem icon={MapPin} label="Adresse">
+              <p className="font-medium">{settings.address}</p>
+            </InfoItem>
+          )}
 
-        {/* ── Horaires ── */}
-        {hours && (
-          <div className="space-y-6">
-            <div className="space-y-1">
-              <h2 className="font-serif text-2xl font-semibold">
-                Horaires d&apos;ouverture
-              </h2>
-              <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
-                <Clock className="h-3.5 w-3.5" />
-                <span>Susceptibles de changer les jours fériés</span>
+          {settings?.phone && (
+            <InfoItem icon={Phone} label="Téléphone">
+              <p className="font-medium">{settings.phone}</p>
+            </InfoItem>
+          )}
+
+          {groupedHours.length > 0 && (
+            <InfoItem icon={Clock} label="Horaires">
+              <div>
+                {groupedHours.map(({ days, formatted }) => (
+                  <p key={days} className="font-medium">
+                    {days} : {formatted}
+                  </p>
+                ))}
               </div>
-            </div>
-            <dl className="divide-border divide-y">
-              {WEEKDAY_KEYS.map((key, index) => {
-                const dayHours = hours[key] ?? null;
-                const formatted = formatDaySchedule(dayHours);
-                const isOpen = dayHours?.isOpen ?? false;
-                return (
-                  <div
-                    key={key}
-                    className="flex items-center justify-between py-3"
-                  >
-                    <dt className="font-medium">{WEEKDAY_NAMES[index]}</dt>
-                    <dd
-                      className={cn(
-                        "text-sm",
-                        isOpen
-                          ? "text-foreground"
-                          : "text-muted-foreground italic"
-                      )}
-                    >
-                      {formatted}
-                    </dd>
-                  </div>
-                );
-              })}
-            </dl>
-          </div>
-        )}
+            </InfoItem>
+          )}
+
+          {settings?.email && (
+            <InfoItem icon={Mail} label="Email">
+              <p className="font-medium">{settings.email}</p>
+            </InfoItem>
+          )}
+        </div>
       </div>
     );
   }
