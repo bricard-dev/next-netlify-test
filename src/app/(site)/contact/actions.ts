@@ -3,8 +3,6 @@
 import nodemailer from 'nodemailer';
 import { contactSchema, type ContactFormValues } from '@/lib/contact-schema';
 
-export type { ContactFormValues };
-
 // ─── Transporter ─────────────────────────────────────────────────────────────
 
 function createTransporter() {
@@ -42,9 +40,9 @@ export async function sendContactEmail(
   try {
     const transporter = createTransporter();
     await transporter.sendMail({
-      from: `"${name}" <${process.env.SMTP_USER}>`,
+      from: `"${name}" <${process.env.SMTP_USER ?? 'contact@localhost'}>`,
       replyTo: email,
-      to: process.env.SMTP_TO,
+      to: process.env.SMTP_TO ?? 'dev@localhost',
       subject: `[Contact] ${subject}`,
       text: `De : ${name} <${email}>\n\n${message}`,
       html: `
