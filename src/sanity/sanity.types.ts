@@ -670,6 +670,62 @@ export type ABOUT_PAGE_QUERY_RESULT = {
   }> | null;
 } | null;
 
+// Source: src/sanity/queries/contact-page.ts
+// Variable: CONTACT_PAGE_QUERY
+// Query: {  "page": *[_type == "contactPage" && _id == "contactPage"][0]{    surtitle,    title,    subtitle,    formTitle,    formSubtitle,    seo  },  "settings": *[_type == "settings" && _id == "settings"][0]{    address,    phone,    email,    hours {      monday { isOpen, open, close },      tuesday { isOpen, open, close },      wednesday { isOpen, open, close },      thursday { isOpen, open, close },      friday { isOpen, open, close },      saturday { isOpen, open, close },      sunday { isOpen, open, close }    }  }}
+export type CONTACT_PAGE_QUERY_RESULT = {
+  page: {
+    surtitle: string | null;
+    title: string | null;
+    subtitle: string | null;
+    formTitle: string | null;
+    formSubtitle: string | null;
+    seo: SeoMeta | null;
+  } | null;
+  settings: {
+    address: string | null;
+    phone: string | null;
+    email: string | null;
+    hours: {
+      monday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+      tuesday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+      wednesday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+      thursday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+      friday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+      saturday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+      sunday: {
+        isOpen: boolean | null;
+        open: TimeValue;
+        close: TimeValue;
+      } | null;
+    } | null;
+  } | null;
+};
+
 // Source: src/sanity/queries/home-page.ts
 // Variable: HOME_PAGE_QUERY
 // Query: *[_type == "homePage" && _id == "homePage"][0]{  heroSurtitle,  heroTitle,  heroSubtitle,  heroImage{ ..., alt },  heroPrimaryCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  heroSecondaryCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  productsSurtitle,  productsTitle,  productsSubtitle,  featuredProducts[]->{    _id,    name,    slug,    tagline,    price,    image{ ..., alt },    category  },  aboutSurtitle,  aboutTitle,  aboutDescription,  aboutCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  aboutPhoto{ ..., alt },  locationSurtitle,  locationTitle,  locationDescription,  locationPhoto{ ..., alt },  locationCta{ label, "href": select(linkType == "internal" => internalPath, externalUrl) },  servicesItems[]{    _key,    iconName,    title,    description  },  reviewsSurtitle,  reviewsTitle,  reviewsItems[]{    _key,    name,    source,    avatar,    rating,    text  },  galleryImages[]{ ..., alt }}
