@@ -28,8 +28,8 @@ function InfoItem({
         <Icon className="h-4 w-4" />
       </div>
       <div>
-        <p className="text-sm font-medium">{label}</p>
-        {children}
+        <p className="font-medium">{label}</p>
+        <div className="text-sm">{children}</div>
       </div>
     </div>
   );
