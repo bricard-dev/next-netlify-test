@@ -22,8 +22,8 @@ export type SanityImageAssetReference = {
 
 export type TeamMember = {
   _type: "teamMember";
-  name?: string;
-  role?: string;
+  name: string;
+  role: string;
   photo?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -37,20 +37,20 @@ export type TeamMember = {
 export type ValueItem = {
   _type: "valueItem";
   iconName?: string;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 };
 
 export type AwardItem = {
   _type: "awardItem";
-  year?: string;
-  competition?: string;
-  title?: string;
+  year: string;
+  competition: string;
+  title: string;
 };
 
 export type ReviewItem = {
   _type: "reviewItem";
-  name?: string;
+  name: string;
   avatar?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -59,15 +59,15 @@ export type ReviewItem = {
     _type: "image";
   };
   source?: string;
-  rating?: number;
-  text?: string;
+  rating: number;
+  text: string;
 };
 
 export type ServiceItem = {
   _type: "serviceItem";
   iconName?: string;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 };
 
 export type SeoMeta = {
@@ -85,7 +85,7 @@ export type SeoMeta = {
 
 export type Cta = {
   _type: "cta";
-  label?: string;
+  label: string;
   linkType?: string;
   internalPath?: "/" | "/produits" | "/a-propos" | "/contact";
   externalUrl?: string;
@@ -122,8 +122,8 @@ export type WeeklyHours = {
 export type DayHours = {
   _type: "dayHours";
   isOpen?: boolean;
-  open?: TimeValue;
-  close?: TimeValue;
+  open: TimeValue;
+  close: TimeValue;
 };
 
 export type LegalNoticePage = {
@@ -143,7 +143,7 @@ export type LegalNoticePage = {
     style?: "normal" | "h2" | "h3";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      href?: string;
+      href: string;
       blank?: boolean;
       _type: "link";
       _key: string;
@@ -172,7 +172,7 @@ export type PrivacyPage = {
     style?: "normal" | "h2" | "h3";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      href?: string;
+      href: string;
       blank?: boolean;
       _type: "link";
       _key: string;
@@ -193,6 +193,8 @@ export type ContactPage = {
   surtitle?: string;
   title?: string;
   subtitle?: string;
+  formTitle?: string;
+  formSubtitle?: string;
   seo?: SeoMeta;
 };
 
@@ -259,18 +261,18 @@ export type AboutPage = {
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
 };
 
 export type SanityImageHotspot = {
   _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
+  x: number;
+  y: number;
+  height: number;
+  width: number;
 };
 
 export type CategoryReference = {
@@ -303,8 +305,8 @@ export type Product = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  slug?: Slug;
+  name: string;
+  slug: Slug;
   category?: CategoryReference;
   price?: number;
   tagline?: string;
@@ -326,7 +328,7 @@ export type Product = {
     _type: "block";
     _key: string;
   }>;
-  image?: {
+  image: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
@@ -338,7 +340,7 @@ export type Product = {
 
 export type Slug = {
   _type: "slug";
-  current?: string;
+  current: string;
   source?: string;
 };
 
@@ -348,7 +350,7 @@ export type Category = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
+  name: string;
   tagline?: string;
 };
 
@@ -439,7 +441,7 @@ export type HomePage = {
       _key: string;
     } & ReviewItem
   >;
-  galleryImages?: Array<{
+  galleryImages: Array<{
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
@@ -456,7 +458,7 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  bakeryName?: string;
+  bakeryName: string;
   address?: string;
   phone?: string;
   email?: string;
@@ -486,9 +488,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
+  height: number;
+  width: number;
+  aspectRatio: number;
 };
 
 export type SanityImageMetadata = {
@@ -639,24 +641,24 @@ export type ABOUT_PAGE_QUERY_RESULT = {
   recompensesTitle: string | null;
   awards: Array<{
     _key: string;
-    year: string | null;
-    competition: string | null;
-    title: string | null;
+    year: string;
+    competition: string;
+    title: string;
   }> | null;
   valeursSurtitle: string | null;
   valeursTitle: string | null;
   values: Array<{
     _key: string;
     iconName: string | null;
-    title: string | null;
-    description: string | null;
+    title: string;
+    description: string;
   }> | null;
   equipeSurtitle: string | null;
   equipeTitle: string | null;
   team: Array<{
     _key: string;
-    name: string | null;
-    role: string | null;
+    name: string;
+    role: string;
     photo: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -684,11 +686,11 @@ export type HOME_PAGE_QUERY_RESULT = {
     _type: "image";
   } | null;
   heroPrimaryCta: {
-    label: string | null;
+    label: string;
     href: string | null | "/" | "/a-propos" | "/contact" | "/produits";
   } | null;
   heroSecondaryCta: {
-    label: string | null;
+    label: string;
     href: string | null | "/" | "/a-propos" | "/contact" | "/produits";
   } | null;
   productsSurtitle: string | null;
@@ -696,8 +698,8 @@ export type HOME_PAGE_QUERY_RESULT = {
   productsSubtitle: string | null;
   featuredProducts: Array<{
     _id: string;
-    name: string | null;
-    slug: Slug | null;
+    name: string;
+    slug: Slug;
     tagline: string | null;
     price: number | null;
     image: {
@@ -707,7 +709,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       crop?: SanityImageCrop;
       alt: string | null;
       _type: "image";
-    } | null;
+    };
     category: CategoryReference | null;
   }> | null;
   aboutSurtitle: string | null;
@@ -731,7 +733,7 @@ export type HOME_PAGE_QUERY_RESULT = {
     _key: string;
   }> | null;
   aboutCta: {
-    label: string | null;
+    label: string;
     href: string | null | "/" | "/a-propos" | "/contact" | "/produits";
   } | null;
   aboutPhoto: {
@@ -754,20 +756,20 @@ export type HOME_PAGE_QUERY_RESULT = {
     _type: "image";
   } | null;
   locationCta: {
-    label: string | null;
+    label: string;
     href: string | null | "/" | "/a-propos" | "/contact" | "/produits";
   } | null;
   servicesItems: Array<{
     _key: string;
     iconName: string | null;
-    title: string | null;
-    description: string | null;
+    title: string;
+    description: string;
   }> | null;
   reviewsSurtitle: string | null;
   reviewsTitle: string | null;
   reviewsItems: Array<{
     _key: string;
-    name: string | null;
+    name: string;
     source: string | null;
     avatar: {
       asset?: SanityImageAssetReference;
@@ -776,8 +778,8 @@ export type HOME_PAGE_QUERY_RESULT = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
-    rating: number | null;
-    text: string | null;
+    rating: number;
+    text: string;
   }> | null;
   galleryImages: Array<{
     asset?: SanityImageAssetReference;
@@ -787,7 +789,7 @@ export type HOME_PAGE_QUERY_RESULT = {
     alt: string | null;
     _type: "image";
     _key: string;
-  }> | null;
+  }>;
 } | null;
 
 // Source: src/sanity/queries/product.ts
@@ -795,8 +797,8 @@ export type HOME_PAGE_QUERY_RESULT = {
 // Query: *[_type == "product" && slug.current == $slug][0]{  _id,  name,  slug,  price,  tagline,  description,  image{ ..., alt },  category->{    _id,    name,    tagline  }}
 export type PRODUCT_BY_SLUG_QUERY_RESULT = {
   _id: string;
-  name: string | null;
-  slug: Slug | null;
+  name: string;
+  slug: Slug;
   price: number | null;
   tagline: string | null;
   description: Array<{
@@ -824,10 +826,10 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
     crop?: SanityImageCrop;
     alt: string | null;
     _type: "image";
-  } | null;
+  };
   category: {
     _id: string;
-    name: string | null;
+    name: string;
     tagline: string | null;
   } | null;
 } | null;
@@ -836,7 +838,7 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
 // Variable: PRODUCT_SLUGS_QUERY
 // Query: *[_type == "product" && defined(slug.current)]{  "slug": slug.current}
 export type PRODUCT_SLUGS_QUERY_RESULT = Array<{
-  slug: string | null;
+  slug: string;
 }>;
 
 // Source: src/sanity/queries/products-page.ts
@@ -848,12 +850,12 @@ export type PRODUCTS_PAGE_QUERY_RESULT = {
   subtitle: string | null;
   categorySections: Array<{
     _id: string;
-    name: string | null;
+    name: string;
     tagline: string | null;
     products: Array<{
       _id: string;
-      name: string | null;
-      slug: Slug | null;
+      name: string;
+      slug: Slug;
       price: number | null;
       tagline: string | null;
       image: {
@@ -863,7 +865,7 @@ export type PRODUCTS_PAGE_QUERY_RESULT = {
         crop?: SanityImageCrop;
         alt: string | null;
         _type: "image";
-      } | null;
+      };
     }>;
   }> | null;
 } | null;
@@ -872,7 +874,7 @@ export type PRODUCTS_PAGE_QUERY_RESULT = {
 // Variable: SETTINGS_QUERY
 // Query: *[_type == "settings" && _id == "settings"][0]{  bakeryName,  instagramUrl,  address,  phone,  email,  hours {    monday { isOpen, open, close },    tuesday { isOpen, open, close },    wednesday { isOpen, open, close },    thursday { isOpen, open, close },    friday { isOpen, open, close },    saturday { isOpen, open, close },    sunday { isOpen, open, close }  },  seo {    title,    description  }}
 export type SETTINGS_QUERY_RESULT = {
-  bakeryName: string | null;
+  bakeryName: string;
   instagramUrl: string | null;
   address: string | null;
   phone: string | null;
@@ -880,38 +882,38 @@ export type SETTINGS_QUERY_RESULT = {
   hours: {
     monday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
     tuesday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
     wednesday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
     thursday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
     friday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
     saturday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
     sunday: {
       isOpen: boolean | null;
-      open: TimeValue | null;
-      close: TimeValue | null;
+      open: TimeValue;
+      close: TimeValue;
     } | null;
   } | null;
   seo: {
