@@ -20,6 +20,34 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type TeamMember = {
+  _type: "teamMember";
+  name?: string;
+  role?: string;
+  photo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
+export type ValueItem = {
+  _type: "valueItem";
+  iconName?: string;
+  title?: string;
+  description?: string;
+};
+
+export type AwardItem = {
+  _type: "awardItem";
+  year?: string;
+  competition?: string;
+  title?: string;
+};
+
 export type ReviewItem = {
   _type: "reviewItem";
   name?: string;
@@ -177,25 +205,55 @@ export type AboutPage = {
   heroSurtitle?: string;
   heroTitle?: string;
   heroSubtitle?: string;
-  heroImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
   storySurtitle?: string;
   storyTitle?: string;
-  storyContent?: string;
-  storyPhotos?: Array<{
+  storyContent?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  storyPhoto?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
-    _key: string;
-  }>;
-  storyCta?: Cta;
+  };
+  recompensesSurtitle?: string;
+  recompensesTitle?: string;
+  awards?: Array<
+    {
+      _key: string;
+    } & AwardItem
+  >;
+  valeursSurtitle?: string;
+  valeursTitle?: string;
+  values?: Array<
+    {
+      _key: string;
+    } & ValueItem
+  >;
+  equipeSurtitle?: string;
+  equipeTitle?: string;
+  team?: Array<
+    {
+      _key: string;
+    } & TeamMember
+  >;
   seo?: SeoMeta;
 };
 
@@ -506,6 +564,9 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
+  | TeamMember
+  | ValueItem
+  | AwardItem
   | ReviewItem
   | ServiceItem
   | SeoMeta
@@ -538,6 +599,74 @@ export type AllSanitySchemaTypes =
   | Geopoint;
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
+// Source: src/sanity/queries/about-page.ts
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{  heroSurtitle,  heroTitle,  heroSubtitle,  storySurtitle,  storyTitle,  storyContent,  storyPhoto{ ..., alt },  recompensesSurtitle,  recompensesTitle,  awards[]{    _key,    year,    competition,    title  },  valeursSurtitle,  valeursTitle,  values[]{    _key,    iconName,    title,    description  },  equipeSurtitle,  equipeTitle,  team[]{    _key,    name,    role,    photo{ ..., alt }  }}
+export type ABOUT_PAGE_QUERY_RESULT = {
+  heroSurtitle: string | null;
+  heroTitle: string | null;
+  heroSubtitle: string | null;
+  storySurtitle: string | null;
+  storyTitle: string | null;
+  storyContent: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  storyPhoto: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string | null;
+    _type: "image";
+  } | null;
+  recompensesSurtitle: string | null;
+  recompensesTitle: string | null;
+  awards: Array<{
+    _key: string;
+    year: string | null;
+    competition: string | null;
+    title: string | null;
+  }> | null;
+  valeursSurtitle: string | null;
+  valeursTitle: string | null;
+  values: Array<{
+    _key: string;
+    iconName: string | null;
+    title: string | null;
+    description: string | null;
+  }> | null;
+  equipeSurtitle: string | null;
+  equipeTitle: string | null;
+  team: Array<{
+    _key: string;
+    name: string | null;
+    role: string | null;
+    photo: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "image";
+    } | null;
+  }> | null;
+} | null;
 
 // Source: src/sanity/queries/home-page.ts
 // Variable: HOME_PAGE_QUERY

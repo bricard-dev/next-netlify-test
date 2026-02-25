@@ -20,6 +20,9 @@ import { ctaType } from './objects/cta';
 import { seoMetaType } from './objects/seo-meta';
 import { serviceItemType } from './objects/service-item';
 import { reviewItemType } from './objects/review-item';
+import { awardItemType } from './objects/award-item';
+import { valueItemType } from './objects/value-item';
+import { teamMemberType } from './objects/team-member';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents
@@ -42,4 +45,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   seoMetaType,
   serviceItemType,
   reviewItemType,
+  awardItemType,
+  valueItemType,
+  teamMemberType,
 ];
