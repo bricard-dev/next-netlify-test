@@ -1,9 +1,9 @@
-import * as React from "react";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { getGroupedWeekSchedule } from "@/lib/schedule";
-import type { SiteSettings } from "@/sanity/queries/settings";
+import { cn } from "@/lib/utils";
 import type { ContactPageData } from "@/sanity/queries/contact-page";
+import type { SiteSettings } from "@/sanity/queries/settings";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import * as React from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -27,7 +27,7 @@ function InfoItem({
       <div className="bg-primary/10 text-primary mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full">
         <Icon className="h-4 w-4" />
       </div>
-      <div>
+      <div className="flex flex-col gap-1">
         <p className="font-medium">{label}</p>
         <div className="text-sm">{children}</div>
       </div>
@@ -41,13 +41,13 @@ const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(
   ({ className, data, ...props }, ref) => {
     const { settings } = data;
     const groupedHours = getGroupedWeekSchedule(
-      settings as unknown as SiteSettings
+      settings as unknown as SiteSettings,
     );
 
     return (
       <div ref={ref} className={cn("space-y-6", className)} {...props}>
         <h2 className="font-serif text-2xl font-semibold">Nous trouver</h2>
-        <div className="space-y-5">
+        <div className="space-y-6">
           {settings?.address && (
             <InfoItem icon={MapPin} label="Adresse">
               <p className="text-muted-foreground">{settings.address}</p>
@@ -80,7 +80,7 @@ const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 ContactInfo.displayName = "ContactInfo";
 
