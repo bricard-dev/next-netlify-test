@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useForm } from '@tanstack/react-form';
-import { z } from 'zod';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { contactSchema } from '@/lib/contact-schema';
-import { sendContactEmail } from '@/app/(site)/contact/actions';
+import { sendContactEmail } from "@/app/(site)/contact/actions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { contactSchema } from "@/lib/contact-schema";
+import { cn } from "@/lib/utils";
+import { useForm } from "@tanstack/react-form";
+import * as React from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -34,27 +33,34 @@ function FieldError({ errors }: { errors: string[] }) {
 const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
   ({ className, formTitle, formSubtitle, ...props }, ref) => {
     const [submitState, setSubmitState] = React.useState<
-      'idle' | 'success' | 'error'
-    >('idle');
-    const [errorMessage, setErrorMessage] = React.useState('');
+      "idle" | "success" | "error"
+    >("idle");
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     const form = useForm({
-      defaultValues: { name: '', email: '', subject: '', message: '' },
+      defaultValues: { name: "", email: "", subject: "", message: "" },
       onSubmit: async ({ value }) => {
-        setSubmitState('idle');
+        setSubmitState("idle");
         const result = await sendContactEmail(value);
         if (result.success) {
-          setSubmitState('success');
+          setSubmitState("success");
           form.reset();
         } else {
-          setSubmitState('error');
+          setSubmitState("error");
           setErrorMessage(result.error ?? "Une erreur s'est produite.");
         }
       },
     });
 
     return (
-      <div ref={ref} className={cn('space-y-8 rounded-2xl bg-[#FAF8F4] p-8 lg:p-10', className)} {...props}>
+      <div
+        ref={ref}
+        className={cn(
+          "space-y-8 rounded-2xl bg-[#FAF8F4] p-8 lg:p-10",
+          className,
+        )}
+        {...props}
+      >
         {/* ── Header ── */}
         {(formTitle || formSubtitle) && (
           <div className="space-y-2">
@@ -68,15 +74,15 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
         )}
 
         {/* ── Success ── */}
-        {submitState === 'success' && (
+        {submitState === "success" && (
           <div className="bg-primary/10 text-primary rounded-lg p-4 text-sm font-medium">
-            Message envoyé avec succès. Nous vous répondrons dans les plus
-            brefs délais.
+            Message envoyé avec succès. Nous vous répondrons dans les plus brefs
+            délais.
           </div>
         )}
 
         {/* ── Error ── */}
-        {submitState === 'error' && (
+        {submitState === "error" && (
           <div className="bg-destructive/10 text-destructive rounded-lg p-4 text-sm font-medium">
             {errorMessage}
           </div>
@@ -204,7 +210,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   placeholder="Votre message…"
-                  rows={5}
+                  rows={8}
                   aria-invalid={field.state.meta.errors.length > 0}
                   aria-describedby={`${field.name}-error`}
                 />
@@ -216,16 +222,16 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
           <form.Subscribe selector={(state) => state.isSubmitting}>
             {(isSubmitting) => (
               <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? 'Envoi en cours…' : 'Envoyer le message'}
+                {isSubmitting ? "Envoi en cours…" : "Envoyer le message"}
               </Button>
             )}
           </form.Subscribe>
         </form>
       </div>
     );
-  }
+  },
 );
-ContactForm.displayName = 'ContactForm';
+ContactForm.displayName = "ContactForm";
 
 export { ContactForm };
 export type { ContactFormProps };
