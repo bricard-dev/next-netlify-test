@@ -30,6 +30,21 @@ export const contactPageType = defineType({
       description: 'Intro text displayed below the title. Address, hours and phone come from Site Settings.',
     }),
     defineField({
+      name: 'formTitle',
+      title: 'Form Title',
+      type: 'string',
+      group: 'content',
+      description: 'Title displayed above the contact form (e.g. "Nous écrire").',
+    }),
+    defineField({
+      name: 'formSubtitle',
+      title: 'Form Subtitle',
+      type: 'text',
+      rows: 2,
+      group: 'content',
+      description: 'Intro text displayed below the form title.',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seoMeta',

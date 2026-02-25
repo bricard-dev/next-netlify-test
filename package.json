@@ -18,16 +18,19 @@
     "@sanity/image-url": "^2.0.3",
     "@sanity/ui": "^3.1.11",
     "@tailwindcss/typography": "^0.5.19",
+    "@tanstack/react-form": "^1.28.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.564.0",
     "next": "16.1.6",
     "next-sanity": "^12.1.0",
+    "nodemailer": "^8.0.1",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sanity": "^5.9.0",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
@@ -36,6 +39,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.4",
