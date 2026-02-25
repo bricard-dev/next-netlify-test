@@ -54,7 +54,7 @@ const ContactForm = React.forwardRef<HTMLDivElement, ContactFormProps>(
     });
 
     return (
-      <div ref={ref} className={cn('space-y-8', className)} {...props}>
+      <div ref={ref} className={cn('space-y-8 rounded-2xl bg-[#FAF8F4] p-8 lg:p-10', className)} {...props}>
         {/* ── Header ── */}
         {(formTitle || formSubtitle) && (
           <div className="space-y-2">
