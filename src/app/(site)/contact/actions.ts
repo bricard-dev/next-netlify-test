@@ -1,18 +1,9 @@
 'use server';
 
 import nodemailer from 'nodemailer';
-import { z } from 'zod';
+import { contactSchema, type ContactFormValues } from '@/lib/contact-schema';
 
-// ─── Schema ───────────────────────────────────────────────────────────────────
-
-export const contactSchema = z.object({
-  name: z.string().min(1, 'Votre nom est requis.'),
-  email: z.string().email('Adresse email invalide.'),
-  subject: z.string().min(1, "L'objet est requis."),
-  message: z.string().min(10, 'Votre message doit faire au moins 10 caractères.'),
-});
-
-export type ContactFormValues = z.infer<typeof contactSchema>;
+export type { ContactFormValues };
 
 // ─── Transporter ─────────────────────────────────────────────────────────────
 

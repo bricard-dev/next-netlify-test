@@ -8,11 +8,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import {
-  sendContactEmail,
-  contactSchema,
-  type ContactFormValues,
-} from '@/app/(site)/contact/actions';
+import { contactSchema } from '@/lib/contact-schema';
+import { sendContactEmail } from '@/app/(site)/contact/actions';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
